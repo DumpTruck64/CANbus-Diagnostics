@@ -1,0 +1,277 @@
+-------------------- Log Start | Tue May  7 05:01:50 2024 --------------------
+platform: Linux-6.1.21-v8+-aarch64-with-glibc2.31
+data_path: /home/Oghma/printer_data
+is_default_data_path: False
+config_file: /home/Oghma/printer_data/config/moonraker.conf
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: False
+instance_uuid: be8a673b2ce84d14935f0ed0a8c797a2
+unix_socket_path: /home/Oghma/printer_data/comms/moonraker.sock
+software_version: v0.8.0-325-g99b97af
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: []
+unofficial_components: []
+log_file: /home/Oghma/printer_data/logs/moonraker.log
+python_version: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+launch_args: /home/Oghma/moonraker-env/bin/python /home/Oghma/moonraker/moonraker/moonraker.py -d /home/Oghma/printer_data
+msgspec_enabled: False
+uvloop_enabled: False
+
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /home/Oghma/printer_data/comms/klippy.sock
+
+[authorization]
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+channel = dev
+refresh_interval = 168
+
+[update_manager fluidd-config]
+type = git_repo
+primary_branch = master
+path = ~/fluidd-config
+origin = https://github.com/fluidd-core/fluidd-config.git
+managed_services = klipper
+
+[update_manager fluidd]
+type = web
+channel = stable
+repo = fluidd-core/fluidd
+path = ~/fluidd
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+managed_services = crowsnest
+install_script = tools/pkglist.sh
+
+[file_manager]
+enable_object_processing = True
+
+#################################################################
+All Configuration Files:
+/home/Oghma/printer_data/config/moonraker.conf
+#################################################################
+
+Database Versions: pylmdb = 1.4.1, lmdb = (0, 9, 29)
+Unsafe Shutdown Count: 20
+
+System Info:
+
+***python***
+  version: (3, 9, 2, 'final', 0)
+  version_string: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 64bit
+  processor: aarch64
+  cpu_desc: 
+  serial_number: efdbc431
+  hardware_desc: BCM2835
+  model: Raspberry Pi 3 Model B Plus Rev 1.3
+  total_memory: 847632
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 1b
+  manufacturer: Samsung
+  oem_id: 534d
+  product_name: EC1S5
+  product_revision: 3.0
+  serial_number: 80dd5728
+  manufacturer_date: 3/2024
+  capacity: 59.7 GiB
+  total_bytes: 64088965120
+
+***distribution***
+  name: Debian GNU/Linux 11 (bullseye)
+  id: debian
+  version: 11
+  version_parts: {'major': '11', 'minor': '', 'build_number': ''}
+  like: 
+  codename: bullseye
+  release_info: {}
+  kernel_version: 6.1.21-v8+
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+Found libcamera Python module, version: v0.0.5+83-bde9b04f
+
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['network-online.target', '-.mount', 'sysinit.target', 'system.slice']
+**After=['sysinit.target', 'basic.target', 'systemd-journald.socket', 'system.slice', 'network-online.target', '-.mount']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/moonraker.env
+**ExecStart=/home/Oghma/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/Oghma/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=Oghma
+
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['-.mount', 'sysinit.target', 'system.slice']
+**After=['sysinit.target', '-.mount', 'systemd-journald.socket', 'network-online.target', 'basic.target', 'system.slice']
+**SupplementaryGroups=[]
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/klipper.env
+**ExecStart=/home/Oghma/klippy-env/bin/python $KLIPPER_ARGS
+**WorkingDirectory=/home/Oghma/klipper
+**FragmentPath=/etc/systemd/system/klipper.service
+**Description=Klipper 3D Printer Firmware SV1
+**User=Oghma
+Git Repo moonraker: No warnings detected
+Git Repo klipper: Warnings detected:
+  Repo has untracked source files: ['klippy/extras/gcode_shell_command.py']
+Git Repo fluidd-config: No warnings detected
+Git Repo crowsnest: No warnings detected
+Klipper Version: v0.12.0-143-g01c7befa-dirty
+2024-05-07 01:01:50,845 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
+2024-05-07 01:01:51,127 [application.py:log_request()] - 101 GET /websocket?token=AYJLOON6HNJ2KP3E3QKJWZEYF3QHLEXR (192.168.50.192) [_TRUSTED_USER_] 6.66ms
+2024-05-07 01:01:51,129 [websockets.py:open()] - Websocket Opened: ID: 548549706368, Proxied: True, User Agent: BBL-Slicer/v01.08.04.51 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.50.101
+2024-05-07 01:01:51,142 [websockets.py:_handle_identify()] - Websocket 548549706368 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-07 01:01:51,144 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-07 01:01:57,512 [websockets.py:on_close()] - Websocket Closed: ID: 548549706368 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 6.39
+2024-05-07 01:01:58,014 [application.py:log_request()] - 101 GET /websocket?token=I5H2NR5MMO3KGHYNFM7BSTWPYMSPL2FK (192.168.50.192) [_TRUSTED_USER_] 5.53ms
+2024-05-07 01:01:58,016 [websockets.py:open()] - Websocket Opened: ID: 548550935552, Proxied: True, User Agent: BBL-Slicer/v01.08.04.51 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.50.101
+2024-05-07 01:01:58,033 [websockets.py:_handle_identify()] - Websocket 548550935552 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-07 01:01:58,035 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-07 01:01:58,339 [websockets.py:on_close()] - Websocket Closed: ID: 548550935552 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 0.33
+2024-05-07 01:01:58,623 [application.py:log_request()] - 101 GET /websocket?token=VG3ZZXTBXM24ICE3UVNEJ3TWFU3OQAW3 (192.168.50.192) [_TRUSTED_USER_] 5.57ms
+2024-05-07 01:01:58,624 [websockets.py:open()] - Websocket Opened: ID: 548548563344, Proxied: True, User Agent: BBL-Slicer/v01.08.04.51 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.50.101
+2024-05-07 01:01:58,637 [websockets.py:_handle_identify()] - Websocket 548548563344 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-07 01:01:58,638 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-07 01:01:59,077 [websockets.py:on_close()] - Websocket Closed: ID: 548548563344 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 0.46
+2024-05-07 01:01:59,253 [application.py:log_request()] - 101 GET /websocket?token=ZUIAANIIZOV3FVWYSPITNJSRS232QB6O (192.168.50.192) [_TRUSTED_USER_] 3.07ms
+2024-05-07 01:01:59,253 [websockets.py:open()] - Websocket Opened: ID: 548548419104, Proxied: True, User Agent: BBL-Slicer/v01.08.04.51 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.50.101
+2024-05-07 01:01:59,267 [websockets.py:_handle_identify()] - Websocket 548548419104 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-07 01:01:59,268 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-07 01:35:38,009 [application.py:prepare()] - Upload Request Received from 192.168.50.192
+Content-Type: multipart/form-data; boundary=------------------------87b3a59e912608b5
+2024-05-07 01:35:42,289 [application.py:post()] - Processing Uploaded File: SB_CW2_Body_ABS_3h27m.gcode
+2024-05-07 01:35:42,730 [shell_command.py:pipe_data_received()] - INFO:metadata:Object Processing is enabled
+
+2024-05-07 01:35:42,757 [shell_command.py:pipe_data_received()] - INFO:metadata:File 'SB_CW2_Body_ABS_3h27m.gcode' currently supports cancellation, processing aborted
+
+2024-05-07 01:35:42,977 [shell_command.py:_check_proc_success()] - Command (/home/Oghma/moonraker-env/bin/python /home/Oghma/moonraker/moonraker/components/file_manager/metadata.py -p /home/Oghma/printer_data/gcodes -f "SB_CW2_Body_ABS_3h27m.gcode" --check-objects) successfully finished
+2024-05-07 01:35:42,986 [application.py:log_request()] - 201 POST /api/files/local (192.168.50.192) [_API_KEY_USER_] 4980.00ms
+2024-05-07 01:44:33,845 [application.py:prepare()] - Upload Request Received from 192.168.50.192
+Content-Type: multipart/form-data; boundary=------------------------b831ecc2c4769254
+2024-05-07 01:46:10,181 [application.py:prepare()] - Upload Request Received from 192.168.50.192
+Content-Type: multipart/form-data; boundary=------------------------796cea106efda7cc
+2024-05-07 01:46:20,286 [application.py:post()] - Processing Uploaded File: SB_CW2_Body_ABS_8h30m.gcode
+2024-05-07 01:46:20,757 [shell_command.py:pipe_data_received()] - INFO:metadata:Object Processing is enabled
+
+2024-05-07 01:46:20,785 [shell_command.py:pipe_data_received()] - INFO:metadata:File 'SB_CW2_Body_ABS_8h30m.gcode' currently supports cancellation, processing aborted
+
+2024-05-07 01:46:21,010 [shell_command.py:_check_proc_success()] - Command (/home/Oghma/moonraker-env/bin/python /home/Oghma/moonraker/moonraker/components/file_manager/metadata.py -p /home/Oghma/printer_data/gcodes -f "SB_CW2_Body_ABS_8h30m.gcode" --check-objects) successfully finished
+2024-05-07 01:46:21,041 [application.py:log_request()] - 201 POST /api/files/local (192.168.50.192) [_API_KEY_USER_] 10863.04ms
+2024-05-07 01:46:21,085 [job_state.py:_status_update()] - Job Started: SB_CW2_Body_ABS_8h30m.gcode
+2024-05-07 01:47:05,168 [websockets.py:on_close()] - Websocket Closed: ID: 548548419104 Close Code: None, Close Reason: None, Pong Time Elapsed: 5.90
+2024-05-07 01:47:38,095 [websockets.py:write_to_socket()] - Websocket closed while writing: 548549708240
+2024-05-07 01:47:42,943 [websockets.py:on_close()] - Websocket Closed: ID: 548549708240 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.98
+2024-05-07 02:46:00,740 [klippy_connection.py:_process_status_update()] - Klippy has shutdown
+2024-05-07 02:46:00,749 [proc_stats.py:_handle_shutdown()] - 
+Moonraker System Usage Statistics:
+System Time: 1715064330.871173, Usage: 1.38%, Memory: 54568 kB
+System Time: 1715064331.872098, Usage: 1.52%, Memory: 54568 kB
+System Time: 1715064332.872928, Usage: 1.46%, Memory: 54568 kB
+System Time: 1715064333.873174, Usage: 1.35%, Memory: 54568 kB
+System Time: 1715064334.873973, Usage: 1.32%, Memory: 54568 kB
+System Time: 1715064335.874902, Usage: 1.33%, Memory: 54568 kB
+System Time: 1715064336.882256, Usage: 3.71%, Memory: 54568 kB
+System Time: 1715064337.884889, Usage: 2.34%, Memory: 54568 kB
+System Time: 1715064338.879317, Usage: 2.1%, Memory: 54568 kB
+System Time: 1715064339.881484, Usage: 1.37%, Memory: 54568 kB
+System Time: 1715064340.882026, Usage: 1.47%, Memory: 54568 kB
+System Time: 1715064341.883276, Usage: 1.38%, Memory: 54568 kB
+System Time: 1715064342.885204, Usage: 1.41%, Memory: 54568 kB
+System Time: 1715064343.889971, Usage: 1.63%, Memory: 54568 kB
+System Time: 1715064344.891282, Usage: 2.39%, Memory: 54568 kB
+System Time: 1715064345.887435, Usage: 2.04%, Memory: 54568 kB
+System Time: 1715064346.889493, Usage: 3.3%, Memory: 54568 kB
+System Time: 1715064347.890396, Usage: 1.41%, Memory: 54568 kB
+System Time: 1715064348.891014, Usage: 1.4%, Memory: 54568 kB
+System Time: 1715064349.892018, Usage: 1.31%, Memory: 54568 kB
+System Time: 1715064350.898246, Usage: 1.69%, Memory: 54568 kB
+System Time: 1715064351.894745, Usage: 2.26%, Memory: 54568 kB
+System Time: 1715064352.895272, Usage: 1.42%, Memory: 54568 kB
+System Time: 1715064353.896567, Usage: 1.46%, Memory: 54568 kB
+System Time: 1715064354.897403, Usage: 1.44%, Memory: 54568 kB
+System Time: 1715064355.898925, Usage: 1.4%, Memory: 54568 kB
+System Time: 1715064356.907751, Usage: 3.56%, Memory: 54568 kB
+System Time: 1715064357.906228, Usage: 2.62%, Memory: 54568 kB
+System Time: 1715064358.902169, Usage: 2.1%, Memory: 54568 kB
+System Time: 1715064359.902905, Usage: 1.36%, Memory: 54568 kB
+CPU Temperature: 40.242
+2024-05-07 02:46:00,752 [proc_stats.py:_handle_shutdown()] - Throttled Flags: 
+2024-05-07 02:48:34,741 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.50.192
+2024-05-07 04:47:13,190 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
+2024-05-07 04:47:13,234 [application.py:log_request()] - 101 GET /websocket?token=KN3WC546VIJOKKXWW3OHZTXU4NM7NBZK (192.168.50.192) [_TRUSTED_USER_] 5.72ms
+2024-05-07 04:47:13,235 [websockets.py:open()] - Websocket Opened: ID: 548550938048, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.101
+2024-05-07 04:47:13,251 [websockets.py:_handle_identify()] - Websocket 548550938048 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-07 04:47:13,254 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-07 04:47:43,609 [websockets.py:write_to_socket()] - Websocket closed while writing: 548550938048
+2024-05-07 04:47:48,243 [websockets.py:on_close()] - Websocket Closed: ID: 548550938048 Close Code: None, Close Reason: None, Pong Time Elapsed: 35.01
+2024-05-07 05:30:43,410 [application.py:log_request()] - 101 GET /websocket?token=VOMGQH2RJLUIVESORSSSUUS57LQ2E5IK (192.168.50.192) [_TRUSTED_USER_] 6.49ms
+2024-05-07 05:30:43,411 [websockets.py:open()] - Websocket Opened: ID: 548548417376, Proxied: True, User Agent: BBL-Slicer/v01.08.04.51 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.50.101
+2024-05-07 05:30:43,437 [websockets.py:_handle_identify()] - Websocket 548548417376 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-07 05:30:43,439 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-07 05:30:44,913 [application.py:log_request()] - 101 GET /websocket?token=REWX7OVLCI2WAD6XUFBQQIRLXBA7A5P6 (192.168.50.192) [_TRUSTED_USER_] 3.23ms
+2024-05-07 05:30:44,914 [websockets.py:open()] - Websocket Opened: ID: 548548566944, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.101
+2024-05-07 05:30:44,992 [websockets.py:_handle_identify()] - Websocket 548548566944 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-07 05:30:44,993 [file_manager.py:get_file_list()] - Updating File List <config>...
