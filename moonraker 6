@@ -1,0 +1,1911 @@
+-------------------- Log Start | Sun May 12 04:17:28 2024 --------------------
+platform: Linux-6.1.21-v8+-aarch64-with-glibc2.31
+data_path: /home/Oghma/printer_data
+is_default_data_path: False
+config_file: /home/Oghma/printer_data/config/moonraker.conf
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: False
+instance_uuid: be8a673b2ce84d14935f0ed0a8c797a2
+unix_socket_path: /home/Oghma/printer_data/comms/moonraker.sock
+software_version: v0.8.0-325-g99b97af
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: []
+unofficial_components: []
+log_file: /home/Oghma/printer_data/logs/moonraker.log
+python_version: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+launch_args: /home/Oghma/moonraker-env/bin/python /home/Oghma/moonraker/moonraker/moonraker.py -d /home/Oghma/printer_data
+msgspec_enabled: False
+uvloop_enabled: False
+
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /home/Oghma/printer_data/comms/klippy.sock
+
+[authorization]
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+channel = dev
+refresh_interval = 168
+
+[update_manager fluidd-config]
+type = git_repo
+primary_branch = master
+path = ~/fluidd-config
+origin = https://github.com/fluidd-core/fluidd-config.git
+managed_services = klipper
+
+[update_manager fluidd]
+type = web
+channel = stable
+repo = fluidd-core/fluidd
+path = ~/fluidd
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+managed_services = crowsnest
+install_script = tools/pkglist.sh
+
+[file_manager]
+enable_object_processing = True
+
+#################################################################
+All Configuration Files:
+/home/Oghma/printer_data/config/moonraker.conf
+#################################################################
+
+Database Versions: pylmdb = 1.4.1, lmdb = (0, 9, 29)
+Unsafe Shutdown Count: 24
+
+System Info:
+
+***python***
+  version: (3, 9, 2, 'final', 0)
+  version_string: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 64bit
+  processor: aarch64
+  cpu_desc: 
+  serial_number: efdbc431
+  hardware_desc: BCM2835
+  model: Raspberry Pi 3 Model B Plus Rev 1.3
+  total_memory: 847632
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 1b
+  manufacturer: Samsung
+  oem_id: 534d
+  product_name: EC1S5
+  product_revision: 3.0
+  serial_number: 80dd5728
+  manufacturer_date: 3/2024
+  capacity: 59.7 GiB
+  total_bytes: 64088965120
+
+***distribution***
+  name: Debian GNU/Linux 11 (bullseye)
+  id: debian
+  version: 11
+  version_parts: {'major': '11', 'minor': '', 'build_number': ''}
+  like: 
+  codename: bullseye
+  release_info: {}
+  kernel_version: 6.1.21-v8+
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+Found libcamera Python module, version: v0.0.5+83-bde9b04f
+
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['-.mount', 'sysinit.target', 'network-online.target', 'system.slice']
+**After=['basic.target', 'sysinit.target', '-.mount', 'network-online.target', 'systemd-journald.socket', 'system.slice']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/moonraker.env
+**ExecStart=/home/Oghma/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/Oghma/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=Oghma
+
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['system.slice', '-.mount', 'sysinit.target']
+**After=['basic.target', 'system.slice', '-.mount', 'network-online.target', 'sysinit.target', 'systemd-journald.socket']
+**SupplementaryGroups=[]
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/klipper.env
+**ExecStart=/home/Oghma/klippy-env/bin/python $KLIPPER_ARGS
+**WorkingDirectory=/home/Oghma/klipper
+**FragmentPath=/etc/systemd/system/klipper.service
+**Description=Klipper 3D Printer Firmware SV1
+**User=Oghma
+Git Repo moonraker: No warnings detected
+Git Repo klipper: Warnings detected:
+  Repo has untracked source files: ['klippy/extras/gcode_shell_command.py']
+Git Repo fluidd-config: No warnings detected
+Git Repo crowsnest: No warnings detected
+Klipper Version: v0.12.0-143-g01c7befa-dirty
+2024-05-12 00:17:28,499 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.50.192
+2024-05-12 00:53:06,756 [websockets.py:write_to_socket()] - Websocket closed while writing: 547880253136
+2024-05-12 00:53:11,586 [websockets.py:on_close()] - Websocket Closed: ID: 547880253136 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-05-12 02:17:41,225 [klippy_connection.py:_process_status_update()] - Klippy has shutdown
+2024-05-12 02:17:41,234 [proc_stats.py:_handle_shutdown()] - 
+Moonraker System Usage Statistics:
+System Time: 1715494631.869584, Usage: 1.44%, Memory: 54040 kB
+System Time: 1715494632.871066, Usage: 1.49%, Memory: 54040 kB
+System Time: 1715494633.871174, Usage: 1.51%, Memory: 54040 kB
+System Time: 1715494634.876511, Usage: 1.64%, Memory: 54040 kB
+System Time: 1715494635.874173, Usage: 5.24%, Memory: 54040 kB
+System Time: 1715494636.873819, Usage: 1.53%, Memory: 54040 kB
+System Time: 1715494637.874255, Usage: 1.45%, Memory: 54040 kB
+System Time: 1715494638.875100, Usage: 1.45%, Memory: 54040 kB
+System Time: 1715494639.875859, Usage: 1.45%, Memory: 54040 kB
+System Time: 1715494640.876414, Usage: 1.48%, Memory: 54040 kB
+System Time: 1715494641.877884, Usage: 1.37%, Memory: 54040 kB
+System Time: 1715494642.879107, Usage: 1.36%, Memory: 54040 kB
+System Time: 1715494643.880340, Usage: 1.4%, Memory: 54040 kB
+System Time: 1715494644.881184, Usage: 1.34%, Memory: 54040 kB
+System Time: 1715494645.883013, Usage: 3.64%, Memory: 54040 kB
+System Time: 1715494646.884675, Usage: 1.54%, Memory: 54040 kB
+System Time: 1715494647.885826, Usage: 1.52%, Memory: 54040 kB
+System Time: 1715494648.886587, Usage: 1.46%, Memory: 54040 kB
+System Time: 1715494649.887323, Usage: 5.46%, Memory: 54044 kB
+System Time: 1715494650.895028, Usage: 1.26%, Memory: 54044 kB
+System Time: 1715494651.890846, Usage: 2.03%, Memory: 54044 kB
+System Time: 1715494652.891809, Usage: 1.47%, Memory: 54044 kB
+System Time: 1715494653.892309, Usage: 1.52%, Memory: 54044 kB
+System Time: 1715494654.893003, Usage: 1.41%, Memory: 54044 kB
+System Time: 1715494655.899019, Usage: 3.37%, Memory: 54044 kB
+System Time: 1715494656.895363, Usage: 2.35%, Memory: 54044 kB
+System Time: 1715494657.896397, Usage: 1.43%, Memory: 54044 kB
+System Time: 1715494658.897492, Usage: 1.41%, Memory: 54044 kB
+System Time: 1715494659.898687, Usage: 1.39%, Memory: 54044 kB
+System Time: 1715494660.899307, Usage: 1.39%, Memory: 54044 kB
+CPU Temperature: 42.932
+2024-05-12 02:17:41,237 [proc_stats.py:_handle_shutdown()] - Throttled Flags: 
+2024-05-12 02:36:36,416 [server.py:add_log_rollover_item()] - CPU Throttled Flags: ['Previously Temperature Limited']
+2024-05-12 03:52:38,350 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
+2024-05-12 03:52:38,449 [application.py:log_request()] - 101 GET /websocket?token=VTQE4DT5XUFWP3IQ3IC5KA3E4PLTDKIV (192.168.50.192) [_TRUSTED_USER_] 5.77ms
+2024-05-12 03:52:38,451 [websockets.py:open()] - Websocket Opened: ID: 547878623024, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-12 03:52:38,524 [websockets.py:_handle_identify()] - Websocket 547878623024 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 03:52:38,526 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 03:53:08,626 [websockets.py:write_to_socket()] - Websocket closed while writing: 547878623024
+2024-05-12 03:53:13,457 [websockets.py:on_close()] - Websocket Closed: ID: 547878623024 Close Code: None, Close Reason: None, Pong Time Elapsed: 35.01
+2024-05-12 04:57:28,569 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.50.192
+2024-05-12 08:14:32,001 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
+2024-05-12 08:14:32,064 [application.py:log_request()] - 101 GET /websocket?token=L57I6CQKLG26SNDEDTHSUETX6CBJ3DKT (192.168.50.192) [_TRUSTED_USER_] 5.71ms
+2024-05-12 08:14:32,065 [websockets.py:open()] - Websocket Opened: ID: 547878860880, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-12 08:14:32,077 [websockets.py:_handle_identify()] - Websocket 547878860880 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 08:14:32,079 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 08:16:54,919 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 08:16:54,970 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 08:16:56,189 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 08:17:49,011 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 08:17:49,048 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 08:17:50,570 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 08:17:50,650 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 08:17:51,141 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 08:19:24,822 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-12 08:19:24,828 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-12 08:19:24,836 [klippy_connection.py:_check_ready()] - 
+mcu 'SB2209': Unable to connect
+Once the underlying issue is corrected, use the
+"FIRMWARE_RESTART" command to reset the firmware, reload the
+config, and restart the host software.
+Error configuring printer
+
+2024-05-12 08:19:32,138 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 08:19:32,176 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 08:19:33,402 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 08:19:42,808 [server.py:_handle_term_signal()] - Exiting with signal SIGTERM
+2024-05-12 08:19:42,886 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 08:19:42,925 [websockets.py:write_to_socket()] - Websocket closed while writing: 547878860880
+2024-05-12 08:19:42,934 [websockets.py:on_close()] - Websocket Closed: ID: 547878860880 Close Code: 1001, Close Reason: Server Shutdown, Pong Time Elapsed: 0.86
+2024-05-12 08:19:44,260 [database.py:close()] - Database statistics:
+
+announcements:
+psize: 4096
+depth: 0
+branch_pages: 0
+leaf_pages: 0
+overflow_pages: 0
+entries: 0
+authorized_users:
+psize: 4096
+depth: 1
+branch_pages: 0
+leaf_pages: 1
+overflow_pages: 0
+entries: 1
+fluidd:
+psize: 4096
+depth: 1
+branch_pages: 0
+leaf_pages: 1
+overflow_pages: 0
+entries: 6
+gcode_metadata:
+psize: 4096
+depth: 2
+branch_pages: 1
+leaf_pages: 14
+overflow_pages: 0
+entries: 37
+history:
+psize: 4096
+depth: 2
+branch_pages: 1
+leaf_pages: 32
+overflow_pages: 0
+entries: 65
+moonraker:
+psize: 4096
+depth: 1
+branch_pages: 0
+leaf_pages: 1
+overflow_pages: 0
+entries: 8
+update_manager:
+psize: 4096
+depth: 2
+branch_pages: 1
+leaf_pages: 2
+overflow_pages: 5
+entries: 6
+2024-05-12 08:19:44,271 [server.py:main()] - Server Shutdown
+-------------------- Log Start | Sun May 12 12:20:08 2024 --------------------
+platform: Linux-6.1.21-v8+-aarch64-with-glibc2.31
+data_path: /home/Oghma/printer_data
+is_default_data_path: False
+config_file: /home/Oghma/printer_data/config/moonraker.conf
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: False
+instance_uuid: be8a673b2ce84d14935f0ed0a8c797a2
+unix_socket_path: /home/Oghma/printer_data/comms/moonraker.sock
+software_version: v0.8.0-325-g99b97af
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: []
+unofficial_components: []
+log_file: /home/Oghma/printer_data/logs/moonraker.log
+python_version: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+launch_args: /home/Oghma/moonraker-env/bin/python /home/Oghma/moonraker/moonraker/moonraker.py -d /home/Oghma/printer_data
+msgspec_enabled: False
+uvloop_enabled: False
+2024-05-12 08:20:08,370 [confighelper.py:read_file()] - Configuration File '/home/Oghma/printer_data/config/moonraker.conf' parsed, total size: 971 B
+2024-05-12 08:20:08,371 [server.py:add_log_rollover_item()] - 
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /home/Oghma/printer_data/comms/klippy.sock
+
+[authorization]
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+channel = dev
+refresh_interval = 168
+
+[update_manager fluidd-config]
+type = git_repo
+primary_branch = master
+path = ~/fluidd-config
+origin = https://github.com/fluidd-core/fluidd-config.git
+managed_services = klipper
+
+[update_manager fluidd]
+type = web
+channel = stable
+repo = fluidd-core/fluidd
+path = ~/fluidd
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+managed_services = crowsnest
+install_script = tools/pkglist.sh
+
+[file_manager]
+enable_object_processing = True
+
+#################################################################
+All Configuration Files:
+/home/Oghma/printer_data/config/moonraker.conf
+#################################################################
+2024-05-12 08:20:08,755 [server.py:load_component()] - Component (secrets) loaded
+2024-05-12 08:20:08,772 [server.py:load_component()] - Component (template) loaded
+2024-05-12 08:20:08,787 [server.py:load_component()] - Component (klippy_connection) loaded
+2024-05-12 08:20:10,239 [server.py:load_component()] - Component (application) loaded
+2024-05-12 08:20:10,350 [server.py:load_component()] - Component (websockets) loaded
+2024-05-12 08:20:10,661 [server.py:load_component()] - Component (dbus_manager) loaded
+2024-05-12 08:20:10,712 [server.py:add_log_rollover_item()] - 
+Database Versions: pylmdb = 1.4.1, lmdb = (0, 9, 29)
+Unsafe Shutdown Count: 24
+2024-05-12 08:20:10,753 [server.py:load_component()] - Component (database) loaded
+2024-05-12 08:20:10,861 [file_manager.py:__init__()] - Using File System Observer: inotify
+2024-05-12 08:20:10,975 [server.py:load_component()] - Component (file_manager) loaded
+2024-05-12 08:20:11,054 [authorization.py:__init__()] - Authorization Configuration Loaded
+Trusted Clients:
+10.0.0.0/8
+127.0.0.0/8
+169.254.0.0/16
+172.16.0.0/12
+192.168.0.0/16
+fe80::/10
+::1/128
+CORS Domains:
+.*\.lan
+.*\.local
+.*://localhost
+.*://localhost:.*
+.*://my\.mainsail\.xyz
+.*://app\.fluidd\.xyz
+2024-05-12 08:20:11,067 [server.py:load_component()] - Component (authorization) loaded
+2024-05-12 08:20:11,081 [server.py:load_component()] - Component (klippy_apis) loaded
+2024-05-12 08:20:11,640 [server.py:add_log_rollover_item()] - 
+System Info:
+
+***python***
+  version: (3, 9, 2, 'final', 0)
+  version_string: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 64bit
+  processor: aarch64
+  cpu_desc: 
+  serial_number: efdbc431
+  hardware_desc: BCM2835
+  model: Raspberry Pi 3 Model B Plus Rev 1.3
+  total_memory: 847632
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 1b
+  manufacturer: Samsung
+  oem_id: 534d
+  product_name: EC1S5
+  product_revision: 3.0
+  serial_number: 80dd5728
+  manufacturer_date: 3/2024
+  capacity: 59.7 GiB
+  total_bytes: 64088965120
+
+***distribution***
+  name: Debian GNU/Linux 11 (bullseye)
+  id: debian
+  version: 11
+  version_parts: {'major': '11', 'minor': '', 'build_number': ''}
+  like: 
+  codename: bullseye
+  release_info: {}
+  kernel_version: 6.1.21-v8+
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+2024-05-12 08:20:11,649 [server.py:load_component()] - Component (shell_command) loaded
+2024-05-12 08:20:11,649 [machine.py:__init__()] - Using System Provider: systemd_dbus
+2024-05-12 08:20:11,815 [server.py:add_log_rollover_item()] - Found libcamera Python module, version: v0.0.5+83-bde9b04f
+2024-05-12 08:20:11,816 [server.py:load_component()] - Component (machine) loaded
+2024-05-12 08:20:11,823 [server.py:load_component()] - Component (data_store) loaded
+2024-05-12 08:20:11,828 [proc_stats.py:__init__()] - Detected 'vcgencmd', throttle checking enabled
+2024-05-12 08:20:11,830 [server.py:load_component()] - Component (proc_stats) loaded
+2024-05-12 08:20:11,834 [server.py:load_component()] - Component (job_state) loaded
+2024-05-12 08:20:11,844 [server.py:load_component()] - Component (job_queue) loaded
+2024-05-12 08:20:11,862 [server.py:load_component()] - Component (http_client) loaded
+2024-05-12 08:20:11,874 [server.py:load_component()] - Component (announcements) loaded
+2024-05-12 08:20:11,882 [server.py:load_component()] - Component (webcam) loaded
+2024-05-12 08:20:11,889 [server.py:load_component()] - Component (extensions) loaded
+2024-05-12 08:20:11,903 [server.py:load_component()] - Component (octoprint_compat) loaded
+2024-05-12 08:20:11,912 [server.py:load_component()] - Component (history) loaded
+2024-05-12 08:20:12,063 [base_deploy.py:log_info()] - Git Repo moonraker: Detected virtualenv: /home/Oghma/moonraker-env
+2024-05-12 08:20:12,073 [base_deploy.py:log_info()] - Git Repo klipper: Detected virtualenv: /home/Oghma/klippy-env
+2024-05-12 08:20:12,105 [server.py:load_component()] - Component (update_manager) loaded
+2024-05-12 08:20:12,109 [server.py:_initialize_component()] - Performing Component Post Init: [dbus_manager]
+2024-05-12 08:20:12,298 [server.py:_initialize_component()] - Performing Component Post Init: [file_manager]
+2024-05-12 08:20:12,514 [server.py:_initialize_component()] - Performing Component Post Init: [authorization]
+2024-05-12 08:20:12,514 [server.py:_initialize_component()] - Performing Component Post Init: [machine]
+2024-05-12 08:20:12,515 [machine.py:validation_init()] - Installation version in database up to date
+2024-05-12 08:20:13,058 [machine.py:check_virt_status()] - No Virtualization Detected
+2024-05-12 08:20:13,083 [machine.py:_find_public_ip()] - Detected Local IP: 192.168.50.96
+2024-05-12 08:20:13,088 [webcam.py:_set_default_host_ip()] - Default public webcam address set: http://192.168.50.96
+2024-05-12 08:20:13,198 [server.py:add_log_rollover_item()] - 
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['-.mount', 'sysinit.target', 'network-online.target', 'system.slice']
+**After=['network-online.target', 'basic.target', 'system.slice', '-.mount', 'systemd-journald.socket', 'sysinit.target']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/moonraker.env
+**ExecStart=/home/Oghma/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/Oghma/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=Oghma
+2024-05-12 08:20:13,198 [server.py:_initialize_component()] - Performing Component Post Init: [proc_stats]
+2024-05-12 08:20:13,198 [server.py:_initialize_component()] - Performing Component Post Init: [announcements]
+2024-05-12 08:20:13,201 [server.py:_initialize_component()] - Performing Component Post Init: [webcam]
+2024-05-12 08:20:13,201 [webcam.py:_set_default_host_ip()] - Default public webcam address set: http://192.168.50.96
+2024-05-12 08:20:13,205 [server.py:_initialize_component()] - Performing Component Post Init: [klippy_connection]
+2024-05-12 08:20:13,206 [server.py:add_log_rollover_item()] - 
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['system.slice', '-.mount', 'sysinit.target']
+**After=['basic.target', 'system.slice', '-.mount', 'network-online.target', 'sysinit.target', 'systemd-journald.socket']
+**SupplementaryGroups=[]
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/klipper.env
+**ExecStart=/home/Oghma/klippy-env/bin/python $KLIPPER_ARGS
+**WorkingDirectory=/home/Oghma/klipper
+**FragmentPath=/etc/systemd/system/klipper.service
+**Description=Klipper 3D Printer Firmware SV1
+**User=Oghma
+2024-05-12 08:20:13,206 [server.py:_initialize_component()] - Performing Component Post Init: [history]
+2024-05-12 08:20:13,210 [server.py:_initialize_component()] - Performing Component Post Init: [update_manager]
+2024-05-12 08:20:13,836 [base_deploy.py:log_info()] - PackageDeploy: PackageKit Provider Configured
+2024-05-12 08:20:13,865 [extensions.py:start_unix_server()] - Creating Unix Domain Socket at '/home/Oghma/printer_data/comms/moonraker.sock'
+2024-05-12 08:20:13,867 [server.py:start_server()] - Starting Moonraker on (0.0.0.0, 7125), Hostname: DarkWing
+2024-05-12 08:20:13,871 [application.py:listen()] - SSL Certificate/Key not configured, aborting HTTPS Server startup
+2024-05-12 08:20:14,126 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 08:20:14,253 [server.py:add_log_rollover_item()] - 
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['sysinit.target', '-.mount', 'system.slice']
+**After=['network-online.target', 'system.slice', 'systemd-journald.socket', '-.mount', 'sysinit.target', 'basic.target']
+**SupplementaryGroups=[]
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/klipper.env
+**ExecStart=/home/Oghma/klippy-env/bin/python $KLIPPER_ARGS
+**WorkingDirectory=/home/Oghma/klipper
+**FragmentPath=/etc/systemd/system/klipper.service
+**Description=Klipper 3D Printer Firmware SV1
+**User=Oghma
+2024-05-12 08:20:14,508 [server.py:add_log_rollover_item()] - Klipper Version: v0.12.0-143-g01c7befa-dirty
+2024-05-12 08:20:15,300 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-12 08:20:15,304 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-12 08:20:15,309 [klippy_connection.py:_check_ready()] - 
+Can not update MCU 'SB2209' config as it is shutdown
+Once the underlying issue is corrected, use the
+"FIRMWARE_RESTART" command to reset the firmware, reload the
+config, and restart the host software.
+Error configuring printer
+
+2024-05-12 08:20:19,961 [base_deploy.py:log_info()] - PackageKit: Detected 13 package updates:
+less
+libc-bin
+libc-dev-bin
+libc-devtools
+libc-l10n
+libc6
+libc6-dbg
+libc6-dev
+libdav1d4
+libglib2.0-0
+libglib2.0-bin
+libglib2.0-data
+locales
+2024-05-12 08:20:20,007 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/moonraker status --porcelain -b) successfully finished
+2024-05-12 08:20:20,031 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/moonraker branch --list --no-color) successfully finished
+2024-05-12 08:20:20,078 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/moonraker remote get-url origin) successfully finished
+2024-05-12 08:20:34,695 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/moonraker fetch origin --prune --progress) successfully finished
+2024-05-12 08:20:34,728 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/moonraker merge-base --is-ancestor HEAD origin/master) successfully finished
+2024-05-12 08:20:34,753 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/moonraker rev-parse HEAD) successfully finished
+2024-05-12 08:20:34,798 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/moonraker describe --always --tags --long --dirty --abbrev=8) successfully finished
+2024-05-12 08:20:34,822 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/moonraker rev-parse origin/master) successfully finished
+2024-05-12 08:20:34,865 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/moonraker describe origin/master --always --tags --long --abbrev=8) successfully finished
+2024-05-12 08:20:34,892 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/moonraker rev-list HEAD..ba9428558adc70ed8cb3cdcea1723358ead23741 --count) successfully finished
+2024-05-12 08:20:34,922 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/moonraker log 99b97afc7de1ed16ddc7db29ab6354bd6ea3dfb7..origin/master --format="sha:%H%x1Dauthor:%an%x1Ddate:%ct%x1Dsubject:%s%x1Dmessage:%b%x1E" --max-count=100) successfully finished
+2024-05-12 08:20:35,029 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/moonraker for-each-ref --count=100 --sort='-creatordate' --contains=HEAD --merged=origin/master --format='%(if)%(*objecttype)%(then)%(*objecttype) %(*objectname)%(else)%(objecttype) %(objectname)%(end) %(refname)' 'refs/tags') successfully finished
+2024-05-12 08:20:35,030 [git_deploy.py:log_repo_info()] - Git Repo moonraker Detected:
+Owner: Arksine
+Repository Name: moonraker
+Path: /home/Oghma/moonraker
+Remote: origin
+Branch: master
+Remote URL: https://github.com/Arksine/moonraker.git
+Recovery URL: https://github.com/Arksine/moonraker.git
+Current Commit SHA: 99b97afc7de1ed16ddc7db29ab6354bd6ea3dfb7
+Upstream Commit SHA: ba9428558adc70ed8cb3cdcea1723358ead23741
+Current Version: v0.8.0-325-g99b97afc
+Upstream Version: v0.8.0-354-gba942855
+Rollback Commit: 99b97afc7de1ed16ddc7db29ab6354bd6ea3dfb7
+Rollback Branch: master
+Rollback Version: v0.8.0-325-g99b97afc
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 29
+Diverged: False
+2024-05-12 08:20:35,031 [base_deploy.py:log_info()] - Git Repo moonraker: Channel: dev
+2024-05-12 08:20:35,031 [base_deploy.py:log_info()] - Git Repo moonraker: Validity check for git repo passed
+2024-05-12 08:20:35,125 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/klipper status --porcelain -b) successfully finished
+2024-05-12 08:20:35,149 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/klipper branch --list --no-color) successfully finished
+2024-05-12 08:20:35,195 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/klipper remote get-url origin) successfully finished
+2024-05-12 08:20:38,225 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/klipper fetch origin --prune --progress) successfully finished
+2024-05-12 08:20:38,262 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/klipper merge-base --is-ancestor HEAD origin/master) successfully finished
+2024-05-12 08:20:38,289 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/klipper rev-parse HEAD) successfully finished
+2024-05-12 08:20:38,500 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/klipper describe --always --tags --long --dirty --abbrev=8) successfully finished
+2024-05-12 08:20:38,527 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/klipper rev-parse origin/master) successfully finished
+2024-05-12 08:20:38,718 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/klipper describe origin/master --always --tags --long --abbrev=8) successfully finished
+2024-05-12 08:20:38,752 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/klipper rev-list HEAD..434770eaf9d382cccba203a3475ace2dc0653d7b --count) successfully finished
+2024-05-12 08:20:38,788 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/klipper log 01c7befacb5b71643130433f2afb3f22ece68d71..origin/master --format="sha:%H%x1Dauthor:%an%x1Ddate:%ct%x1Dsubject:%s%x1Dmessage:%b%x1E" --max-count=100) successfully finished
+2024-05-12 08:20:39,011 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/klipper for-each-ref --count=100 --sort='-creatordate' --contains=HEAD --merged=origin/master --format='%(if)%(*objecttype)%(then)%(*objecttype) %(*objectname)%(else)%(objecttype) %(objectname)%(end) %(refname)' 'refs/tags') successfully finished
+2024-05-12 08:20:39,013 [git_deploy.py:log_repo_info()] - Git Repo klipper Detected:
+Owner: Klipper3d
+Repository Name: klipper
+Path: /home/Oghma/klipper
+Remote: origin
+Branch: master
+Remote URL: https://github.com/Klipper3d/klipper
+Recovery URL: https://github.com/Klipper3d/klipper
+Current Commit SHA: 01c7befacb5b71643130433f2afb3f22ece68d71
+Upstream Commit SHA: 434770eaf9d382cccba203a3475ace2dc0653d7b
+Current Version: v0.12.0-143-g01c7befa-dirty
+Upstream Version: v0.12.0-179-g434770ea
+Rollback Commit: 01c7befacb5b71643130433f2afb3f22ece68d71
+Rollback Branch: master
+Rollback Version: v0.12.0-143-g01c7befa
+Is Dirty: True
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 36
+Diverged: False
+Repo Warnings:
+  Repo is dirty.  Detected the following modifed files: ['klippy/mcu.py']
+  Repo has untracked source files: ['klippy/extras/gcode_shell_command.py']
+2024-05-12 08:20:39,013 [base_deploy.py:log_info()] - Git Repo klipper: Channel: dev
+2024-05-12 08:20:39,014 [base_deploy.py:log_info()] - Git Repo klipper: Repo validation check failed, updates disabled
+2024-05-12 08:20:39,072 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/fluidd-config status --porcelain -b) successfully finished
+2024-05-12 08:20:39,102 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/fluidd-config branch --list --no-color) successfully finished
+2024-05-12 08:20:39,155 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/fluidd-config remote get-url origin) successfully finished
+2024-05-12 08:20:39,755 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/fluidd-config fetch origin --prune --progress) successfully finished
+2024-05-12 08:20:39,780 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/fluidd-config merge-base --is-ancestor HEAD origin/master) successfully finished
+2024-05-12 08:20:39,808 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/fluidd-config rev-parse HEAD) successfully finished
+2024-05-12 08:20:39,843 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/fluidd-config describe --always --tags --long --dirty --abbrev=8) successfully finished
+2024-05-12 08:20:39,874 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/fluidd-config rev-parse origin/master) successfully finished
+2024-05-12 08:20:39,904 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/fluidd-config describe origin/master --always --tags --long --abbrev=8) successfully finished
+2024-05-12 08:20:39,929 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/fluidd-config rev-list HEAD..ce48c5854e9ca3ca72b63d0327069fac20e94c7c --count) successfully finished
+2024-05-12 08:20:39,931 [git_deploy.py:log_repo_info()] - Git Repo fluidd-config Detected:
+Owner: fluidd-core
+Repository Name: fluidd-config
+Path: /home/Oghma/fluidd-config
+Remote: origin
+Branch: master
+Remote URL: https://github.com/fluidd-core/fluidd-config.git
+Recovery URL: https://github.com/fluidd-core/fluidd-config.git
+Current Commit SHA: ce48c5854e9ca3ca72b63d0327069fac20e94c7c
+Upstream Commit SHA: ce48c5854e9ca3ca72b63d0327069fac20e94c7c
+Current Version: v1.2.0-0-gce48c585
+Upstream Version: v1.2.0-0-gce48c585
+Rollback Commit: ce48c5854e9ca3ca72b63d0327069fac20e94c7c
+Rollback Branch: master
+Rollback Version: v1.2.0-0-gce48c585
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+2024-05-12 08:20:39,932 [base_deploy.py:log_info()] - Git Repo fluidd-config: Channel: dev
+2024-05-12 08:20:39,932 [base_deploy.py:log_info()] - Git Repo fluidd-config: Validity check for git repo passed
+2024-05-12 08:20:40,150 [base_deploy.py:log_info()] - Web Client fluidd: Detected
+Repo: fluidd-core/fluidd
+Channel: stable
+Path: /home/Oghma/fluidd
+Local Version: v1.29.1
+Remote Version: v1.30.0
+Valid: True
+Fallback Detected: False
+Pre-release: False
+Download Url: https://github.com/fluidd-core/fluidd/releases/download/v1.30.0/fluidd.zip
+Download Size: 3715088
+Content Type: application/zip
+Rollback Version: v1.29.1
+Rollback Repo: fluidd-core/fluidd
+2024-05-12 08:20:40,194 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/crowsnest status --porcelain -b) successfully finished
+2024-05-12 08:20:40,219 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/crowsnest branch --list --no-color) successfully finished
+2024-05-12 08:20:40,265 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/crowsnest remote get-url origin) successfully finished
+2024-05-12 08:20:40,856 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/crowsnest fetch origin --prune --progress) successfully finished
+2024-05-12 08:20:40,882 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/crowsnest merge-base --is-ancestor HEAD origin/master) successfully finished
+2024-05-12 08:20:40,906 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/crowsnest rev-parse HEAD) successfully finished
+2024-05-12 08:20:40,940 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/crowsnest describe --always --tags --long --dirty --abbrev=8) successfully finished
+2024-05-12 08:20:40,964 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/crowsnest rev-parse origin/master) successfully finished
+2024-05-12 08:20:40,996 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/crowsnest describe origin/master --always --tags --long --abbrev=8) successfully finished
+2024-05-12 08:20:41,023 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/crowsnest rev-list HEAD..d75a3aeb018384e59d03518754f6148c98894ed9 --count) successfully finished
+2024-05-12 08:20:41,051 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/crowsnest log 6ac4711e17f6f7c51998d1f928166fdaee383bf7..origin/master --format="sha:%H%x1Dauthor:%an%x1Ddate:%ct%x1Dsubject:%s%x1Dmessage:%b%x1E" --max-count=100) successfully finished
+2024-05-12 08:20:41,100 [shell_command.py:_check_proc_success()] - Command (git -C /home/Oghma/crowsnest for-each-ref --count=100 --sort='-creatordate' --contains=HEAD --merged=origin/master --format='%(if)%(*objecttype)%(then)%(*objecttype) %(*objectname)%(else)%(objecttype) %(objectname)%(end) %(refname)' 'refs/tags') successfully finished
+2024-05-12 08:20:41,101 [git_deploy.py:log_repo_info()] - Git Repo crowsnest Detected:
+Owner: mainsail-crew
+Repository Name: crowsnest
+Path: /home/Oghma/crowsnest
+Remote: origin
+Branch: master
+Remote URL: https://github.com/mainsail-crew/crowsnest.git
+Recovery URL: https://github.com/mainsail-crew/crowsnest.git
+Current Commit SHA: 6ac4711e17f6f7c51998d1f928166fdaee383bf7
+Upstream Commit SHA: d75a3aeb018384e59d03518754f6148c98894ed9
+Current Version: v4.1.8-1-g6ac4711e
+Upstream Version: v4.1.9-1-gd75a3aeb
+Rollback Commit: 6ac4711e17f6f7c51998d1f928166fdaee383bf7
+Rollback Branch: master
+Rollback Version: v4.1.8-1-g6ac4711e
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 4
+Diverged: False
+2024-05-12 08:20:41,101 [base_deploy.py:log_info()] - Git Repo crowsnest: Channel: dev
+2024-05-12 08:20:41,102 [base_deploy.py:log_info()] - Git Repo crowsnest: Validity check for git repo passed
+2024-05-12 08:21:20,021 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
+2024-05-12 08:21:20,148 [application.py:log_request()] - 101 GET /websocket?token=CPAR5ASJNGQTO7GS6LRCK5TCC5LCXMU5 (192.168.50.192) [_TRUSTED_USER_] 9.94ms
+2024-05-12 08:21:20,149 [websockets.py:open()] - Websocket Opened: ID: 547611266016, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-12 08:21:20,164 [websockets.py:_handle_identify()] - Websocket 547611266016 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 08:21:20,166 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 08:21:34,046 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 08:21:34,101 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 08:21:35,311 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 08:21:39,265 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-12 08:21:39,269 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-12 08:21:39,515 [job_state.py:_handle_started()] - Job state initialized: standby
+2024-05-12 08:21:39,783 [klippy_connection.py:_check_ready()] - Klippy ready
+2024-05-12 08:21:40,268 [data_store.py:_init_sensors()] - Configuring available sensors: ['heater_bed', 'temperature_sensor Octopus', 'temperature_fan Pi', 'temperature_fan SB2209', 'extruder']
+2024-05-12 09:22:29,726 [websockets.py:on_close()] - Websocket Closed: ID: 547611266016 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 9.56
+2024-05-12 09:22:30,300 [application.py:log_request()] - 101 GET /websocket?token=CFOOWGJ3BWZLQVUGM7EIED2ZE5KVTCQ4 (192.168.50.192) [_TRUSTED_USER_] 5.63ms
+2024-05-12 09:22:30,301 [websockets.py:open()] - Websocket Opened: ID: 547611266496, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-12 09:22:30,326 [websockets.py:_handle_identify()] - Websocket 547611266496 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 09:22:30,328 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 09:22:44,376 [application.py:log_request()] - 101 GET /websocket (192.168.50.192) [_TRUSTED_USER_] 6.72ms
+2024-05-12 09:22:44,377 [websockets.py:open()] - Websocket Opened: ID: 547610710944, Proxied: False, User Agent: BBL-Slicer/v01.08.04.51 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.50.96
+2024-05-12 09:22:44,380 [application.py:log_request()] - 101 GET /websocket (192.168.50.192) [_TRUSTED_USER_] 7.80ms
+2024-05-12 09:22:44,381 [websockets.py:open()] - Websocket Opened: ID: 547610710464, Proxied: True, User Agent: BBL-Slicer/v01.08.04.51 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.50.96
+2024-05-12 09:22:44,386 [websockets.py:on_close()] - Websocket Closed: ID: 547610710944 Close Code: None, Close Reason: None, Pong Time Elapsed: 0.02
+2024-05-12 09:22:44,390 [websockets.py:on_close()] - Websocket Closed: ID: 547610710464 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 0.02
+2024-05-12 09:22:44,628 [application.py:log_request()] - 101 GET /websocket?token=Q5YRSLQD6S7F5EKXT4AMWGPSS3VYCXL5 (192.168.50.192) [_TRUSTED_USER_] 3.51ms
+2024-05-12 09:22:44,629 [websockets.py:open()] - Websocket Opened: ID: 547610712576, Proxied: False, User Agent: BBL-Slicer/v01.08.04.51 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.50.96
+2024-05-12 09:22:44,644 [websockets.py:_handle_identify()] - Websocket 547610712576 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 09:22:44,645 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 09:22:51,178 [application.py:prepare()] - Upload Request Received from 192.168.50.192
+Content-Type: multipart/form-data; boundary=------------------------bb7cf9c7b591b477
+2024-05-12 09:22:51,996 [application.py:post()] - Processing Uploaded File: temperature_tower_ABS_1h9m.gcode
+2024-05-12 09:22:52,660 [shell_command.py:pipe_data_received()] - INFO:metadata:Object Processing is enabled
+
+2024-05-12 09:22:52,688 [shell_command.py:pipe_data_received()] - INFO:metadata:File 'temperature_tower_ABS_1h9m.gcode' currently supports cancellation, processing aborted
+
+2024-05-12 09:22:52,964 [shell_command.py:_check_proc_success()] - Command (/home/Oghma/moonraker-env/bin/python /home/Oghma/moonraker/moonraker/components/file_manager/metadata.py -p /home/Oghma/printer_data/gcodes -f "temperature_tower_ABS_1h9m.gcode" --check-objects) successfully finished
+2024-05-12 09:22:52,995 [application.py:log_request()] - 201 POST /api/files/local (192.168.50.192) [_API_KEY_USER_] 1819.80ms
+2024-05-12 09:22:53,439 [job_state.py:_status_update()] - Job Started: temperature_tower_ABS_1h9m.gcode
+2024-05-12 09:23:48,050 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: machine.update.recover, Code: 400, Message: Recovery Attempt Refused: Klippy is printing
+2024-05-12 09:23:48,052 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: machine.update.recover, Code: 400, Message: Recovery Attempt Refused: Klippy is printing
+2024-05-12 09:35:56,843 [websockets.py:on_close()] - Websocket Closed: ID: 547611266496 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 6.53
+2024-05-12 09:35:57,412 [application.py:log_request()] - 101 GET /websocket?token=KOXZCGHUWD6FEZBP3L5BNGXUG5CEC264 (192.168.50.192) [_TRUSTED_USER_] 6.06ms
+2024-05-12 09:35:57,413 [websockets.py:open()] - Websocket Opened: ID: 547609684672, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-12 09:35:57,428 [websockets.py:_handle_identify()] - Websocket 547609684672 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 09:35:57,430 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 09:56:38,746 [application.py:prepare()] - Upload Request Received from 192.168.50.192
+Content-Type: multipart/form-data; boundary=---------------------------25358246752220027267803024745
+2024-05-12 09:56:38,779 [application.py:post()] - Processing Uploaded File: DW Macros.cfg
+2024-05-12 09:56:38,797 [application.py:log_request()] - 201 POST /server/files/upload (192.168.50.192) [_TRUSTED_USER_] 56.50ms
+2024-05-12 09:56:40,024 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 09:56:40,071 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 09:56:40,232 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 09:56:41,297 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 09:56:50,631 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-12 09:56:50,635 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-12 09:56:50,882 [job_state.py:_handle_started()] - Job state initialized: standby
+2024-05-12 09:56:51,180 [klippy_connection.py:_check_ready()] - Klippy ready
+2024-05-12 09:56:51,648 [data_store.py:_init_sensors()] - Configuring available sensors: ['heater_bed', 'temperature_sensor Octopus', 'temperature_fan Pi', 'temperature_fan SB2209', 'extruder']
+2024-05-12 10:00:32,358 [job_state.py:_status_update()] - Job Started: temperature_tower_ABS_1h9m.gcode
+2024-05-12 10:01:43,159 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 60.00 seconds
+2024-05-12 10:02:43,162 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 120.00 seconds
+2024-05-12 10:03:43,166 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 180.01 seconds
+2024-05-12 10:04:43,168 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 240.01 seconds
+2024-05-12 10:05:43,173 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 300.02 seconds
+2024-05-12 10:06:43,176 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 360.02 seconds
+2024-05-12 10:07:43,178 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 420.02 seconds
+2024-05-12 10:08:43,181 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 480.02 seconds
+2024-05-12 10:09:43,184 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 540.03 seconds
+2024-05-12 10:10:43,187 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 600.03 seconds
+2024-05-12 10:55:27,838 [websockets.py:on_close()] - Websocket Closed: ID: 547610712576 Close Code: None, Close Reason: None, Pong Time Elapsed: 3.20
+2024-05-12 10:56:07,521 [websockets.py:write_to_socket()] - Websocket closed while writing: 547609684672
+2024-05-12 10:56:12,419 [websockets.py:on_close()] - Websocket Closed: ID: 547609684672 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-05-12 11:00:25,807 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.50.192
+2024-05-12 11:27:26,433 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
+2024-05-12 11:27:26,480 [application.py:log_request()] - 101 GET /websocket?token=WMXJZ2NVNXUU6Z357MUZK2OYY2COJEF2 (192.168.50.192) [_TRUSTED_USER_] 5.75ms
+2024-05-12 11:27:26,482 [websockets.py:open()] - Websocket Opened: ID: 547611611248, Proxied: False, User Agent: BBL-Slicer/v01.08.04.51 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.50.96
+2024-05-12 11:27:26,500 [websockets.py:_handle_identify()] - Websocket 547611611248 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 11:27:26,502 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 11:27:28,257 [application.py:log_request()] - 101 GET /websocket?token=6AYATLJG3AHWONSY6CDW4NN4F3L54TTL (192.168.50.192) [_TRUSTED_USER_] 3.42ms
+2024-05-12 11:27:28,257 [websockets.py:open()] - Websocket Opened: ID: 547611612976, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-12 11:27:28,297 [websockets.py:_handle_identify()] - Websocket 547611612976 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 11:27:28,298 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 11:30:37,256 [application.py:prepare()] - Upload Request Received from 192.168.50.192
+Content-Type: multipart/form-data; boundary=------------------------037fea190ccaa924
+2024-05-12 11:30:39,053 [application.py:post()] - Processing Uploaded File: sb2040_fan_cover_3010_ABS_1h0m.gcode
+2024-05-12 11:30:39,499 [shell_command.py:pipe_data_received()] - INFO:metadata:Object Processing is enabled
+
+2024-05-12 11:30:39,530 [shell_command.py:pipe_data_received()] - INFO:metadata:File 'sb2040_fan_cover_3010_ABS_1h0m.gcode' currently supports cancellation, processing aborted
+
+2024-05-12 11:30:39,749 [shell_command.py:_check_proc_success()] - Command (/home/Oghma/moonraker-env/bin/python /home/Oghma/moonraker/moonraker/components/file_manager/metadata.py -p /home/Oghma/printer_data/gcodes -f "sb2040_fan_cover_3010_ABS_1h0m.gcode" --check-objects) successfully finished
+2024-05-12 11:30:39,780 [application.py:log_request()] - 201 POST /api/files/local (192.168.50.192) [_API_KEY_USER_] 2527.91ms
+2024-05-12 11:30:40,010 [job_state.py:_status_update()] - Job Started: sb2040_fan_cover_3010_ABS_1h0m.gcode
+2024-05-12 11:48:32,289 [klippy_connection.py:_process_status_update()] - Klippy has shutdown
+2024-05-12 11:48:32,315 [proc_stats.py:_handle_shutdown()] - 
+Moonraker System Usage Statistics:
+System Time: 1715528882.722312, Usage: 2.4%, Memory: 54316 kB
+System Time: 1715528883.722926, Usage: 2.38%, Memory: 54316 kB
+System Time: 1715528884.724458, Usage: 4.63%, Memory: 54316 kB
+System Time: 1715528885.730505, Usage: 2.51%, Memory: 54316 kB
+System Time: 1715528886.726454, Usage: 4.25%, Memory: 54316 kB
+System Time: 1715528887.726964, Usage: 2.5%, Memory: 54316 kB
+System Time: 1715528888.727849, Usage: 2.85%, Memory: 54316 kB
+System Time: 1715528889.728837, Usage: 2.51%, Memory: 54316 kB
+System Time: 1715528890.729902, Usage: 2.65%, Memory: 54316 kB
+System Time: 1715528891.734566, Usage: 2.68%, Memory: 54316 kB
+System Time: 1715528892.736331, Usage: 4.18%, Memory: 54316 kB
+System Time: 1715528893.737326, Usage: 3.71%, Memory: 54316 kB
+System Time: 1715528894.736547, Usage: 6.9%, Memory: 54316 kB
+System Time: 1715528895.736554, Usage: 2.44%, Memory: 54316 kB
+System Time: 1715528896.736856, Usage: 2.75%, Memory: 54316 kB
+System Time: 1715528897.737667, Usage: 2.31%, Memory: 54316 kB
+System Time: 1715528898.738025, Usage: 2.59%, Memory: 54316 kB
+System Time: 1715528899.745528, Usage: 2.52%, Memory: 54316 kB
+System Time: 1715528900.745492, Usage: 4.19%, Memory: 54316 kB
+System Time: 1715528901.746176, Usage: 3.56%, Memory: 54316 kB
+System Time: 1715528902.745838, Usage: 2.46%, Memory: 54316 kB
+System Time: 1715528903.749733, Usage: 2.45%, Memory: 54316 kB
+System Time: 1715528904.748677, Usage: 4.61%, Memory: 54316 kB
+System Time: 1715528905.748456, Usage: 2.71%, Memory: 54316 kB
+System Time: 1715528906.757931, Usage: 2.9%, Memory: 54316 kB
+System Time: 1715528907.750071, Usage: 4.24%, Memory: 54316 kB
+System Time: 1715528908.751067, Usage: 2.59%, Memory: 54316 kB
+System Time: 1715528909.752513, Usage: 2.34%, Memory: 54316 kB
+System Time: 1715528910.753117, Usage: 2.36%, Memory: 54316 kB
+System Time: 1715528911.754287, Usage: 2.28%, Memory: 54316 kB
+CPU Temperature: 42.932
+2024-05-12 11:48:32,319 [proc_stats.py:_handle_shutdown()] - Throttled Flags: 
+2024-05-12 11:49:24,006 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 11:49:24,089 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 11:49:24,139 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 11:49:25,272 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 11:50:58,096 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-12 11:50:58,104 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-12 11:50:58,111 [klippy_connection.py:_check_ready()] - 
+mcu 'SB2209': Unable to connect
+Once the underlying issue is corrected, use the
+"FIRMWARE_RESTART" command to reset the firmware, reload the
+config, and restart the host software.
+Error configuring printer
+
+2024-05-12 12:01:24,916 [server.py:add_log_rollover_item()] - CPU Throttled Flags: ['Previously Temperature Limited']
+2024-05-12 12:02:45,043 [server.py:add_log_rollover_item()] - CPU Throttled Flags: ['Temperature Limit Active', 'Previously Temperature Limited']
+2024-05-12 12:44:21,218 [websockets.py:on_close()] - Websocket Closed: ID: 547611611248 Close Code: None, Close Reason: None, Pong Time Elapsed: 4.72
+2024-05-12 12:44:58,625 [websockets.py:write_to_socket()] - Websocket closed while writing: 547611612976
+2024-05-12 12:45:03,266 [websockets.py:on_close()] - Websocket Closed: ID: 547611612976 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-05-12 12:50:25,838 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.50.192
+2024-05-12 13:45:02,944 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
+2024-05-12 13:45:02,988 [application.py:log_request()] - 101 GET /websocket?token=UMMPZNP5NKEMMRWEKOKTYMYVE3P4D6FW (192.168.50.192) [_TRUSTED_USER_] 5.01ms
+2024-05-12 13:45:02,990 [websockets.py:open()] - Websocket Opened: ID: 547609191856, Proxied: False, User Agent: BBL-Slicer/v01.08.04.51 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.50.96
+2024-05-12 13:45:03,002 [websockets.py:_handle_identify()] - Websocket 547609191856 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 13:45:03,004 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 13:45:05,009 [application.py:log_request()] - 101 GET /websocket?token=PT7M5VAEDVDLBV2KRATUM23JM2KJFBJL (192.168.50.192) [_TRUSTED_USER_] 3.49ms
+2024-05-12 13:45:05,010 [websockets.py:open()] - Websocket Opened: ID: 547609190656, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-12 13:45:05,022 [websockets.py:_handle_identify()] - Websocket 547609190656 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 13:45:05,022 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 14:15:38,244 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 14:15:38,266 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 14:15:38,338 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 14:15:38,692 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 14:15:39,555 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 14:17:12,464 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-12 14:17:12,472 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-12 14:17:12,479 [klippy_connection.py:_check_ready()] - 
+mcu 'SB2209': Unable to connect
+Once the underlying issue is corrected, use the
+"FIRMWARE_RESTART" command to reset the firmware, reload the
+config, and restart the host software.
+Error configuring printer
+
+2024-05-12 14:17:39,593 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 14:17:39,662 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 14:17:39,698 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 14:17:39,834 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 14:17:40,861 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 14:18:11,444 [server.py:_handle_term_signal()] - Exiting with signal SIGTERM
+2024-05-12 14:18:11,455 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 14:18:11,518 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 14:18:11,533 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 14:18:11,557 [websockets.py:write_to_socket()] - Websocket closed while writing: 547609191856
+2024-05-12 14:18:11,558 [websockets.py:write_to_socket()] - Websocket closed while writing: 547609190656
+2024-05-12 14:18:11,562 [websockets.py:on_close()] - Websocket Closed: ID: 547609191856 Close Code: 1001, Close Reason: Server Shutdown, Pong Time Elapsed: 8.55
+2024-05-12 14:18:11,606 [websockets.py:on_close()] - Websocket Closed: ID: 547609190656 Close Code: 1001, Close Reason: Server Shutdown, Pong Time Elapsed: 6.58
+2024-05-12 14:18:11,624 [database.py:close()] - Database statistics:
+
+announcements:
+psize: 4096
+depth: 0
+branch_pages: 0
+leaf_pages: 0
+overflow_pages: 0
+entries: 0
+authorized_users:
+psize: 4096
+depth: 1
+branch_pages: 0
+leaf_pages: 1
+overflow_pages: 0
+entries: 1
+fluidd:
+psize: 4096
+depth: 1
+branch_pages: 0
+leaf_pages: 1
+overflow_pages: 0
+entries: 6
+gcode_metadata:
+psize: 4096
+depth: 2
+branch_pages: 1
+leaf_pages: 14
+overflow_pages: 0
+entries: 38
+history:
+psize: 4096
+depth: 2
+branch_pages: 1
+leaf_pages: 34
+overflow_pages: 0
+entries: 68
+moonraker:
+psize: 4096
+depth: 1
+branch_pages: 0
+leaf_pages: 1
+overflow_pages: 0
+entries: 8
+update_manager:
+psize: 4096
+depth: 2
+branch_pages: 1
+leaf_pages: 2
+overflow_pages: 6
+entries: 6
+2024-05-12 14:18:11,633 [server.py:main()] - Server Shutdown
+-------------------- Log Start | Sun May 12 18:18:35 2024 --------------------
+platform: Linux-6.1.21-v8+-aarch64-with-glibc2.31
+data_path: /home/Oghma/printer_data
+is_default_data_path: False
+config_file: /home/Oghma/printer_data/config/moonraker.conf
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: False
+instance_uuid: be8a673b2ce84d14935f0ed0a8c797a2
+unix_socket_path: /home/Oghma/printer_data/comms/moonraker.sock
+software_version: v0.8.0-325-g99b97af
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: []
+unofficial_components: []
+log_file: /home/Oghma/printer_data/logs/moonraker.log
+python_version: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+launch_args: /home/Oghma/moonraker-env/bin/python /home/Oghma/moonraker/moonraker/moonraker.py -d /home/Oghma/printer_data
+msgspec_enabled: False
+uvloop_enabled: False
+2024-05-12 14:18:35,507 [confighelper.py:read_file()] - Configuration File '/home/Oghma/printer_data/config/moonraker.conf' parsed, total size: 971 B
+2024-05-12 14:18:35,508 [server.py:add_log_rollover_item()] - 
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /home/Oghma/printer_data/comms/klippy.sock
+
+[authorization]
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+channel = dev
+refresh_interval = 168
+
+[update_manager fluidd-config]
+type = git_repo
+primary_branch = master
+path = ~/fluidd-config
+origin = https://github.com/fluidd-core/fluidd-config.git
+managed_services = klipper
+
+[update_manager fluidd]
+type = web
+channel = stable
+repo = fluidd-core/fluidd
+path = ~/fluidd
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+managed_services = crowsnest
+install_script = tools/pkglist.sh
+
+[file_manager]
+enable_object_processing = True
+
+#################################################################
+All Configuration Files:
+/home/Oghma/printer_data/config/moonraker.conf
+#################################################################
+2024-05-12 14:18:35,908 [server.py:load_component()] - Component (secrets) loaded
+2024-05-12 14:18:35,929 [server.py:load_component()] - Component (template) loaded
+2024-05-12 14:18:35,950 [server.py:load_component()] - Component (klippy_connection) loaded
+2024-05-12 14:18:37,619 [server.py:load_component()] - Component (application) loaded
+2024-05-12 14:18:37,721 [server.py:load_component()] - Component (websockets) loaded
+2024-05-12 14:18:37,927 [server.py:load_component()] - Component (dbus_manager) loaded
+2024-05-12 14:18:38,020 [server.py:add_log_rollover_item()] - 
+Database Versions: pylmdb = 1.4.1, lmdb = (0, 9, 29)
+Unsafe Shutdown Count: 24
+2024-05-12 14:18:38,063 [server.py:load_component()] - Component (database) loaded
+2024-05-12 14:18:38,163 [file_manager.py:__init__()] - Using File System Observer: inotify
+2024-05-12 14:18:38,280 [server.py:load_component()] - Component (file_manager) loaded
+2024-05-12 14:18:38,358 [authorization.py:__init__()] - Authorization Configuration Loaded
+Trusted Clients:
+10.0.0.0/8
+127.0.0.0/8
+169.254.0.0/16
+172.16.0.0/12
+192.168.0.0/16
+fe80::/10
+::1/128
+CORS Domains:
+.*\.lan
+.*\.local
+.*://localhost
+.*://localhost:.*
+.*://my\.mainsail\.xyz
+.*://app\.fluidd\.xyz
+2024-05-12 14:18:38,373 [server.py:load_component()] - Component (authorization) loaded
+2024-05-12 14:18:38,388 [server.py:load_component()] - Component (klippy_apis) loaded
+2024-05-12 14:18:38,989 [server.py:add_log_rollover_item()] - 
+System Info:
+
+***python***
+  version: (3, 9, 2, 'final', 0)
+  version_string: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 64bit
+  processor: aarch64
+  cpu_desc: 
+  serial_number: efdbc431
+  hardware_desc: BCM2835
+  model: Raspberry Pi 3 Model B Plus Rev 1.3
+  total_memory: 847632
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 1b
+  manufacturer: Samsung
+  oem_id: 534d
+  product_name: EC1S5
+  product_revision: 3.0
+  serial_number: 80dd5728
+  manufacturer_date: 3/2024
+  capacity: 59.7 GiB
+  total_bytes: 64088965120
+
+***distribution***
+  name: Debian GNU/Linux 11 (bullseye)
+  id: debian
+  version: 11
+  version_parts: {'major': '11', 'minor': '', 'build_number': ''}
+  like: 
+  codename: bullseye
+  release_info: {}
+  kernel_version: 6.1.21-v8+
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+2024-05-12 14:18:38,998 [server.py:load_component()] - Component (shell_command) loaded
+2024-05-12 14:18:38,998 [machine.py:__init__()] - Using System Provider: systemd_dbus
+2024-05-12 14:18:39,181 [server.py:add_log_rollover_item()] - Found libcamera Python module, version: v0.0.5+83-bde9b04f
+2024-05-12 14:18:39,182 [server.py:load_component()] - Component (machine) loaded
+2024-05-12 14:18:39,190 [server.py:load_component()] - Component (data_store) loaded
+2024-05-12 14:18:39,196 [proc_stats.py:__init__()] - Detected 'vcgencmd', throttle checking enabled
+2024-05-12 14:18:39,198 [server.py:load_component()] - Component (proc_stats) loaded
+2024-05-12 14:18:39,202 [server.py:load_component()] - Component (job_state) loaded
+2024-05-12 14:18:39,214 [server.py:load_component()] - Component (job_queue) loaded
+2024-05-12 14:18:39,233 [server.py:load_component()] - Component (http_client) loaded
+2024-05-12 14:18:39,246 [server.py:load_component()] - Component (announcements) loaded
+2024-05-12 14:18:39,255 [server.py:load_component()] - Component (webcam) loaded
+2024-05-12 14:18:39,263 [server.py:load_component()] - Component (extensions) loaded
+2024-05-12 14:18:39,273 [server.py:load_component()] - Component (history) loaded
+2024-05-12 14:18:39,437 [base_deploy.py:log_info()] - Git Repo moonraker: Detected virtualenv: /home/Oghma/moonraker-env
+2024-05-12 14:18:39,448 [base_deploy.py:log_info()] - Git Repo klipper: Detected virtualenv: /home/Oghma/klippy-env
+2024-05-12 14:18:39,481 [server.py:load_component()] - Component (update_manager) loaded
+2024-05-12 14:18:39,500 [server.py:load_component()] - Component (octoprint_compat) loaded
+2024-05-12 14:18:39,504 [server.py:_initialize_component()] - Performing Component Post Init: [dbus_manager]
+2024-05-12 14:18:39,699 [server.py:_initialize_component()] - Performing Component Post Init: [file_manager]
+2024-05-12 14:18:39,956 [server.py:_initialize_component()] - Performing Component Post Init: [authorization]
+2024-05-12 14:18:39,956 [server.py:_initialize_component()] - Performing Component Post Init: [machine]
+2024-05-12 14:18:39,957 [machine.py:validation_init()] - Installation version in database up to date
+2024-05-12 14:18:40,572 [machine.py:check_virt_status()] - No Virtualization Detected
+2024-05-12 14:18:40,600 [machine.py:_find_public_ip()] - Detected Local IP: 192.168.50.96
+2024-05-12 14:18:40,605 [webcam.py:_set_default_host_ip()] - Default public webcam address set: http://192.168.50.96
+2024-05-12 14:18:40,726 [server.py:add_log_rollover_item()] - 
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['sysinit.target', 'system.slice', 'network-online.target', '-.mount']
+**After=['sysinit.target', 'system.slice', 'network-online.target', 'systemd-journald.socket', 'basic.target', '-.mount']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/moonraker.env
+**ExecStart=/home/Oghma/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/Oghma/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=Oghma
+2024-05-12 14:18:40,726 [server.py:_initialize_component()] - Performing Component Post Init: [proc_stats]
+2024-05-12 14:18:40,727 [server.py:_initialize_component()] - Performing Component Post Init: [announcements]
+2024-05-12 14:18:40,731 [server.py:_initialize_component()] - Performing Component Post Init: [webcam]
+2024-05-12 14:18:40,731 [webcam.py:_set_default_host_ip()] - Default public webcam address set: http://192.168.50.96
+2024-05-12 14:18:40,732 [server.py:_initialize_component()] - Performing Component Post Init: [klippy_connection]
+2024-05-12 14:18:40,733 [server.py:add_log_rollover_item()] - 
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['sysinit.target', '-.mount', 'system.slice']
+**After=['network-online.target', 'system.slice', 'systemd-journald.socket', '-.mount', 'sysinit.target', 'basic.target']
+**SupplementaryGroups=[]
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/klipper.env
+**ExecStart=/home/Oghma/klippy-env/bin/python $KLIPPER_ARGS
+**WorkingDirectory=/home/Oghma/klipper
+**FragmentPath=/etc/systemd/system/klipper.service
+**Description=Klipper 3D Printer Firmware SV1
+**User=Oghma
+2024-05-12 14:18:40,733 [server.py:_initialize_component()] - Performing Component Post Init: [history]
+2024-05-12 14:18:40,745 [server.py:_initialize_component()] - Performing Component Post Init: [update_manager]
+2024-05-12 14:18:40,793 [server.py:add_log_rollover_item()] - CPU Throttled Flags: ['Temperature Limit Active', 'Previously Temperature Limited']
+2024-05-12 14:18:41,403 [base_deploy.py:log_info()] - PackageDeploy: PackageKit Provider Configured
+2024-05-12 14:18:41,408 [git_deploy.py:log_repo_info()] - Git Repo moonraker Detected:
+Owner: Arksine
+Repository Name: moonraker
+Path: /home/Oghma/moonraker
+Remote: origin
+Branch: master
+Remote URL: https://github.com/Arksine/moonraker.git
+Recovery URL: https://github.com/Arksine/moonraker.git
+Current Commit SHA: 99b97afc7de1ed16ddc7db29ab6354bd6ea3dfb7
+Upstream Commit SHA: ba9428558adc70ed8cb3cdcea1723358ead23741
+Current Version: v0.8.0-325-g99b97afc
+Upstream Version: v0.8.0-354-gba942855
+Rollback Commit: 99b97afc7de1ed16ddc7db29ab6354bd6ea3dfb7
+Rollback Branch: master
+Rollback Version: v0.8.0-325-g99b97afc
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 29
+Diverged: False
+2024-05-12 14:18:41,412 [git_deploy.py:log_repo_info()] - Git Repo klipper Detected:
+Owner: Klipper3d
+Repository Name: klipper
+Path: /home/Oghma/klipper
+Remote: origin
+Branch: master
+Remote URL: https://github.com/Klipper3d/klipper
+Recovery URL: https://github.com/Klipper3d/klipper
+Current Commit SHA: 01c7befacb5b71643130433f2afb3f22ece68d71
+Upstream Commit SHA: 434770eaf9d382cccba203a3475ace2dc0653d7b
+Current Version: v0.12.0-143-g01c7befa-dirty
+Upstream Version: v0.12.0-179-g434770ea
+Rollback Commit: 01c7befacb5b71643130433f2afb3f22ece68d71
+Rollback Branch: master
+Rollback Version: v0.12.0-143-g01c7befa
+Is Dirty: True
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 36
+Diverged: False
+Repo Warnings:
+  Repo is dirty.  Detected the following modifed files: ['klippy/mcu.py']
+  Repo has untracked source files: ['klippy/extras/gcode_shell_command.py']
+2024-05-12 14:18:41,419 [git_deploy.py:log_repo_info()] - Git Repo fluidd-config Detected:
+Owner: fluidd-core
+Repository Name: fluidd-config
+Path: /home/Oghma/fluidd-config
+Remote: origin
+Branch: master
+Remote URL: https://github.com/fluidd-core/fluidd-config.git
+Recovery URL: https://github.com/fluidd-core/fluidd-config.git
+Current Commit SHA: ce48c5854e9ca3ca72b63d0327069fac20e94c7c
+Upstream Commit SHA: ce48c5854e9ca3ca72b63d0327069fac20e94c7c
+Current Version: v1.2.0-0-gce48c585
+Upstream Version: v1.2.0-0-gce48c585
+Rollback Commit: ce48c5854e9ca3ca72b63d0327069fac20e94c7c
+Rollback Branch: master
+Rollback Version: v1.2.0-0-gce48c585
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+2024-05-12 14:18:41,437 [base_deploy.py:log_info()] - Web Client fluidd: Detected
+Repo: fluidd-core/fluidd
+Channel: stable
+Path: /home/Oghma/fluidd
+Local Version: v1.29.1
+Remote Version: v1.30.0
+Valid: True
+Fallback Detected: False
+Pre-release: False
+Download Url: https://github.com/fluidd-core/fluidd/releases/download/v1.30.0/fluidd.zip
+Download Size: 3715088
+Content Type: application/zip
+Rollback Version: v1.29.1
+Rollback Repo: fluidd-core/fluidd
+2024-05-12 14:18:41,440 [git_deploy.py:log_repo_info()] - Git Repo crowsnest Detected:
+Owner: mainsail-crew
+Repository Name: crowsnest
+Path: /home/Oghma/crowsnest
+Remote: origin
+Branch: master
+Remote URL: https://github.com/mainsail-crew/crowsnest.git
+Recovery URL: https://github.com/mainsail-crew/crowsnest.git
+Current Commit SHA: 6ac4711e17f6f7c51998d1f928166fdaee383bf7
+Upstream Commit SHA: d75a3aeb018384e59d03518754f6148c98894ed9
+Current Version: v4.1.8-1-g6ac4711e
+Upstream Version: v4.1.9-1-gd75a3aeb
+Rollback Commit: 6ac4711e17f6f7c51998d1f928166fdaee383bf7
+Rollback Branch: master
+Rollback Version: v4.1.8-1-g6ac4711e
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 4
+Diverged: False
+2024-05-12 14:18:41,441 [base_deploy.py:log_info()] - PackageKit: Next refresh in: 6 Days, 18 Hours, 1 Minute, 39 Seconds
+2024-05-12 14:18:41,442 [base_deploy.py:log_info()] - Git Repo moonraker: Next refresh in: 6 Days, 18 Hours, 1 Minute, 54 Seconds
+2024-05-12 14:18:41,442 [base_deploy.py:log_info()] - Git Repo klipper: Next refresh in: 6 Days, 18 Hours, 1 Minute, 58 Seconds
+2024-05-12 14:18:41,442 [base_deploy.py:log_info()] - Git Repo fluidd-config: Next refresh in: 6 Days, 18 Hours, 1 Minute, 58 Seconds
+2024-05-12 14:18:41,442 [base_deploy.py:log_info()] - Web Client fluidd: Next refresh in: 6 Days, 18 Hours, 1 Minute, 59 Seconds
+2024-05-12 14:18:41,442 [base_deploy.py:log_info()] - Git Repo crowsnest: Next refresh in: 6 Days, 18 Hours, 2 Minutes
+2024-05-12 14:18:41,452 [extensions.py:start_unix_server()] - Creating Unix Domain Socket at '/home/Oghma/printer_data/comms/moonraker.sock'
+2024-05-12 14:18:41,456 [server.py:start_server()] - Starting Moonraker on (0.0.0.0, 7125), Hostname: DarkWing
+2024-05-12 14:18:41,459 [application.py:listen()] - SSL Certificate/Key not configured, aborting HTTPS Server startup
+2024-05-12 14:18:41,712 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 14:18:41,861 [server.py:add_log_rollover_item()] - 
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['-.mount', 'sysinit.target', 'system.slice']
+**After=['systemd-journald.socket', 'basic.target', '-.mount', 'sysinit.target', 'system.slice', 'network-online.target']
+**SupplementaryGroups=[]
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/klipper.env
+**ExecStart=/home/Oghma/klippy-env/bin/python $KLIPPER_ARGS
+**WorkingDirectory=/home/Oghma/klipper
+**FragmentPath=/etc/systemd/system/klipper.service
+**Description=Klipper 3D Printer Firmware SV1
+**User=Oghma
+2024-05-12 14:18:42,117 [server.py:add_log_rollover_item()] - Klipper Version: v0.12.0-143-g01c7befa-dirty
+2024-05-12 14:18:42,498 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
+2024-05-12 14:18:42,717 [application.py:log_request()] - 101 GET /websocket?token=2EBMVRREMRT5YGDAUQ6JUZSSZ7AGCKNG (192.168.50.192) [_TRUSTED_USER_] 8.19ms
+2024-05-12 14:18:42,718 [websockets.py:open()] - Websocket Opened: ID: 548033305376, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-12 14:18:42,733 [websockets.py:_handle_identify()] - Websocket 548033305376 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 14:18:42,735 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 14:18:43,255 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-12 14:18:43,260 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-12 14:18:43,505 [job_state.py:_handle_started()] - Job state initialized: standby
+2024-05-12 14:18:43,786 [klippy_connection.py:_check_ready()] - Klippy ready
+2024-05-12 14:18:44,257 [data_store.py:_init_sensors()] - Configuring available sensors: ['heater_bed', 'temperature_sensor Octopus', 'temperature_fan Pi', 'temperature_fan SB2209', 'extruder']
+2024-05-12 14:22:45,523 [klippy_connection.py:_process_status_update()] - Klippy has shutdown
+2024-05-12 14:22:45,533 [proc_stats.py:_handle_shutdown()] - 
+Moonraker System Usage Statistics:
+System Time: 1715538135.928420, Usage: 6.88%, Memory: 51292 kB
+System Time: 1715538136.928366, Usage: 3.75%, Memory: 51292 kB
+System Time: 1715538137.929651, Usage: 3.47%, Memory: 51292 kB
+System Time: 1715538138.930791, Usage: 3.58%, Memory: 51292 kB
+System Time: 1715538139.932067, Usage: 3.46%, Memory: 51292 kB
+System Time: 1715538140.935254, Usage: 3.34%, Memory: 51292 kB
+System Time: 1715538141.938548, Usage: 3.37%, Memory: 51292 kB
+System Time: 1715538142.938579, Usage: 4.1%, Memory: 51292 kB
+System Time: 1715538143.941043, Usage: 3.17%, Memory: 51292 kB
+System Time: 1715538144.950028, Usage: 3.0%, Memory: 51292 kB
+System Time: 1715538145.950871, Usage: 7.19%, Memory: 51292 kB
+System Time: 1715538146.954651, Usage: 3.45%, Memory: 51292 kB
+System Time: 1715538147.959681, Usage: 3.41%, Memory: 51292 kB
+System Time: 1715538148.961848, Usage: 3.61%, Memory: 51292 kB
+System Time: 1715538149.964732, Usage: 3.42%, Memory: 51292 kB
+System Time: 1715538150.968308, Usage: 3.32%, Memory: 51292 kB
+System Time: 1715538151.971077, Usage: 3.39%, Memory: 51292 kB
+System Time: 1715538152.973680, Usage: 4.02%, Memory: 51292 kB
+System Time: 1715538153.976861, Usage: 3.42%, Memory: 51292 kB
+System Time: 1715538154.980154, Usage: 3.49%, Memory: 51292 kB
+System Time: 1715538155.986489, Usage: 7.73%, Memory: 51292 kB
+System Time: 1715538156.981395, Usage: 4.02%, Memory: 51292 kB
+System Time: 1715538157.989277, Usage: 2.82%, Memory: 51292 kB
+System Time: 1715538158.989815, Usage: 4.12%, Memory: 51292 kB
+System Time: 1715538159.991419, Usage: 4.57%, Memory: 51296 kB
+System Time: 1715538160.985486, Usage: 3.7%, Memory: 51296 kB
+System Time: 1715538161.983945, Usage: 1.99%, Memory: 51296 kB
+System Time: 1715538162.985398, Usage: 2.58%, Memory: 51296 kB
+System Time: 1715538163.986958, Usage: 1.85%, Memory: 51296 kB
+System Time: 1715538164.988436, Usage: 1.88%, Memory: 51296 kB
+CPU Temperature: 45.084
+2024-05-12 14:22:45,538 [proc_stats.py:_handle_shutdown()] - Throttled Flags: Previously Temperature Limited
+2024-05-12 14:23:35,498 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 60.00 seconds
+2024-05-12 14:24:35,501 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 120.00 seconds
+2024-05-12 14:25:35,504 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 180.01 seconds
+2024-05-12 14:25:58,173 [server.py:_handle_term_signal()] - Exiting with signal SIGTERM
+2024-05-12 14:25:58,322 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 14:25:58,329 [websockets.py:write_to_socket()] - Websocket closed while writing: 548033305376
+2024-05-12 14:25:58,332 [websockets.py:on_close()] - Websocket Closed: ID: 548033305376 Close Code: 1001, Close Reason: Server Shutdown, Pong Time Elapsed: 5.55
+2024-05-12 14:25:58,340 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.gcode.script, Code: 503, Message: Klippy Disconnected
+2024-05-12 14:25:58,385 [database.py:close()] - Database statistics:
+
+announcements:
+psize: 4096
+depth: 0
+branch_pages: 0
+leaf_pages: 0
+overflow_pages: 0
+entries: 0
+authorized_users:
+psize: 4096
+depth: 1
+branch_pages: 0
+leaf_pages: 1
+overflow_pages: 0
+entries: 1
+fluidd:
+psize: 4096
+depth: 1
+branch_pages: 0
+leaf_pages: 1
+overflow_pages: 0
+entries: 6
+gcode_metadata:
+psize: 4096
+depth: 2
+branch_pages: 1
+leaf_pages: 14
+overflow_pages: 0
+entries: 38
+history:
+psize: 4096
+depth: 2
+branch_pages: 1
+leaf_pages: 34
+overflow_pages: 0
+entries: 68
+moonraker:
+psize: 4096
+depth: 1
+branch_pages: 0
+leaf_pages: 1
+overflow_pages: 0
+entries: 8
+update_manager:
+psize: 4096
+depth: 2
+branch_pages: 1
+leaf_pages: 2
+overflow_pages: 6
+entries: 6
+2024-05-12 14:25:58,397 [server.py:main()] - Server Shutdown
+-------------------- Log Start | Sun May 12 18:26:26 2024 --------------------
+platform: Linux-6.1.21-v8+-aarch64-with-glibc2.31
+data_path: /home/Oghma/printer_data
+is_default_data_path: False
+config_file: /home/Oghma/printer_data/config/moonraker.conf
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: False
+instance_uuid: be8a673b2ce84d14935f0ed0a8c797a2
+unix_socket_path: /home/Oghma/printer_data/comms/moonraker.sock
+software_version: v0.8.0-325-g99b97af
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: []
+unofficial_components: []
+log_file: /home/Oghma/printer_data/logs/moonraker.log
+python_version: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+launch_args: /home/Oghma/moonraker-env/bin/python /home/Oghma/moonraker/moonraker/moonraker.py -d /home/Oghma/printer_data
+msgspec_enabled: False
+uvloop_enabled: False
+2024-05-12 14:26:26,289 [confighelper.py:read_file()] - Configuration File '/home/Oghma/printer_data/config/moonraker.conf' parsed, total size: 971 B
+2024-05-12 14:26:26,290 [server.py:add_log_rollover_item()] - 
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /home/Oghma/printer_data/comms/klippy.sock
+
+[authorization]
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+channel = dev
+refresh_interval = 168
+
+[update_manager fluidd-config]
+type = git_repo
+primary_branch = master
+path = ~/fluidd-config
+origin = https://github.com/fluidd-core/fluidd-config.git
+managed_services = klipper
+
+[update_manager fluidd]
+type = web
+channel = stable
+repo = fluidd-core/fluidd
+path = ~/fluidd
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+managed_services = crowsnest
+install_script = tools/pkglist.sh
+
+[file_manager]
+enable_object_processing = True
+
+#################################################################
+All Configuration Files:
+/home/Oghma/printer_data/config/moonraker.conf
+#################################################################
+2024-05-12 14:26:26,710 [server.py:load_component()] - Component (secrets) loaded
+2024-05-12 14:26:26,727 [server.py:load_component()] - Component (template) loaded
+2024-05-12 14:26:26,743 [server.py:load_component()] - Component (klippy_connection) loaded
+2024-05-12 14:26:28,227 [server.py:load_component()] - Component (application) loaded
+2024-05-12 14:26:28,343 [server.py:load_component()] - Component (websockets) loaded
+2024-05-12 14:26:28,620 [server.py:load_component()] - Component (dbus_manager) loaded
+2024-05-12 14:26:28,672 [server.py:add_log_rollover_item()] - 
+Database Versions: pylmdb = 1.4.1, lmdb = (0, 9, 29)
+Unsafe Shutdown Count: 24
+2024-05-12 14:26:28,713 [server.py:load_component()] - Component (database) loaded
+2024-05-12 14:26:28,814 [file_manager.py:__init__()] - Using File System Observer: inotify
+2024-05-12 14:26:28,924 [server.py:load_component()] - Component (file_manager) loaded
+2024-05-12 14:26:29,013 [authorization.py:__init__()] - Authorization Configuration Loaded
+Trusted Clients:
+10.0.0.0/8
+127.0.0.0/8
+169.254.0.0/16
+172.16.0.0/12
+192.168.0.0/16
+fe80::/10
+::1/128
+CORS Domains:
+.*\.lan
+.*\.local
+.*://localhost
+.*://localhost:.*
+.*://my\.mainsail\.xyz
+.*://app\.fluidd\.xyz
+2024-05-12 14:26:29,028 [server.py:load_component()] - Component (authorization) loaded
+2024-05-12 14:26:29,045 [server.py:load_component()] - Component (klippy_apis) loaded
+2024-05-12 14:26:29,592 [server.py:add_log_rollover_item()] - 
+System Info:
+
+***python***
+  version: (3, 9, 2, 'final', 0)
+  version_string: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 64bit
+  processor: aarch64
+  cpu_desc: 
+  serial_number: efdbc431
+  hardware_desc: BCM2835
+  model: Raspberry Pi 3 Model B Plus Rev 1.3
+  total_memory: 847628
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 1b
+  manufacturer: Samsung
+  oem_id: 534d
+  product_name: EC1S5
+  product_revision: 3.0
+  serial_number: 80dd5728
+  manufacturer_date: 3/2024
+  capacity: 59.7 GiB
+  total_bytes: 64088965120
+
+***distribution***
+  name: Debian GNU/Linux 11 (bullseye)
+  id: debian
+  version: 11
+  version_parts: {'major': '11', 'minor': '', 'build_number': ''}
+  like: 
+  codename: bullseye
+  release_info: {}
+  kernel_version: 6.1.21-v8+
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+2024-05-12 14:26:29,600 [server.py:load_component()] - Component (shell_command) loaded
+2024-05-12 14:26:29,601 [machine.py:__init__()] - Using System Provider: systemd_dbus
+2024-05-12 14:26:29,767 [server.py:add_log_rollover_item()] - Found libcamera Python module, version: v0.0.5+83-bde9b04f
+2024-05-12 14:26:29,768 [server.py:load_component()] - Component (machine) loaded
+2024-05-12 14:26:29,775 [server.py:load_component()] - Component (data_store) loaded
+2024-05-12 14:26:29,780 [proc_stats.py:__init__()] - Detected 'vcgencmd', throttle checking enabled
+2024-05-12 14:26:29,782 [server.py:load_component()] - Component (proc_stats) loaded
+2024-05-12 14:26:29,785 [server.py:load_component()] - Component (job_state) loaded
+2024-05-12 14:26:29,795 [server.py:load_component()] - Component (job_queue) loaded
+2024-05-12 14:26:29,814 [server.py:load_component()] - Component (http_client) loaded
+2024-05-12 14:26:29,825 [server.py:load_component()] - Component (announcements) loaded
+2024-05-12 14:26:29,833 [server.py:load_component()] - Component (webcam) loaded
+2024-05-12 14:26:29,840 [server.py:load_component()] - Component (extensions) loaded
+2024-05-12 14:26:29,852 [server.py:load_component()] - Component (octoprint_compat) loaded
+2024-05-12 14:26:29,862 [server.py:load_component()] - Component (history) loaded
+2024-05-12 14:26:30,011 [base_deploy.py:log_info()] - Git Repo moonraker: Detected virtualenv: /home/Oghma/moonraker-env
+2024-05-12 14:26:30,022 [base_deploy.py:log_info()] - Git Repo klipper: Detected virtualenv: /home/Oghma/klippy-env
+2024-05-12 14:26:30,052 [server.py:load_component()] - Component (update_manager) loaded
+2024-05-12 14:26:30,057 [server.py:_initialize_component()] - Performing Component Post Init: [dbus_manager]
+2024-05-12 14:26:30,249 [server.py:_initialize_component()] - Performing Component Post Init: [file_manager]
+2024-05-12 14:26:30,469 [server.py:_initialize_component()] - Performing Component Post Init: [authorization]
+2024-05-12 14:26:30,469 [server.py:_initialize_component()] - Performing Component Post Init: [machine]
+2024-05-12 14:26:30,470 [machine.py:validation_init()] - Installation version in database up to date
+2024-05-12 14:26:31,816 [machine.py:check_virt_status()] - No Virtualization Detected
+2024-05-12 14:26:31,842 [machine.py:_find_public_ip()] - Detected Local IP: 192.168.50.96
+2024-05-12 14:26:31,847 [webcam.py:_set_default_host_ip()] - Default public webcam address set: http://192.168.50.96
+2024-05-12 14:26:31,965 [server.py:add_log_rollover_item()] - 
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['network-online.target', 'sysinit.target', '-.mount', 'system.slice']
+**After=['sysinit.target', 'system.slice', 'network-online.target', 'basic.target', '-.mount', 'systemd-journald.socket']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/moonraker.env
+**ExecStart=/home/Oghma/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/Oghma/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=Oghma
+2024-05-12 14:26:31,965 [server.py:_initialize_component()] - Performing Component Post Init: [proc_stats]
+2024-05-12 14:26:31,966 [server.py:_initialize_component()] - Performing Component Post Init: [announcements]
+2024-05-12 14:26:31,967 [server.py:_initialize_component()] - Performing Component Post Init: [webcam]
+2024-05-12 14:26:31,968 [webcam.py:_set_default_host_ip()] - Default public webcam address set: http://192.168.50.96
+2024-05-12 14:26:31,969 [server.py:_initialize_component()] - Performing Component Post Init: [klippy_connection]
+2024-05-12 14:26:31,969 [server.py:add_log_rollover_item()] - 
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['-.mount', 'sysinit.target', 'system.slice']
+**After=['systemd-journald.socket', 'basic.target', '-.mount', 'sysinit.target', 'system.slice', 'network-online.target']
+**SupplementaryGroups=[]
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/klipper.env
+**ExecStart=/home/Oghma/klippy-env/bin/python $KLIPPER_ARGS
+**WorkingDirectory=/home/Oghma/klipper
+**FragmentPath=/etc/systemd/system/klipper.service
+**Description=Klipper 3D Printer Firmware SV1
+**User=Oghma
+2024-05-12 14:26:31,970 [server.py:_initialize_component()] - Performing Component Post Init: [history]
+2024-05-12 14:26:31,974 [server.py:_initialize_component()] - Performing Component Post Init: [update_manager]
+2024-05-12 14:26:32,559 [base_deploy.py:log_info()] - PackageDeploy: PackageKit Provider Configured
+2024-05-12 14:26:32,565 [git_deploy.py:log_repo_info()] - Git Repo moonraker Detected:
+Owner: Arksine
+Repository Name: moonraker
+Path: /home/Oghma/moonraker
+Remote: origin
+Branch: master
+Remote URL: https://github.com/Arksine/moonraker.git
+Recovery URL: https://github.com/Arksine/moonraker.git
+Current Commit SHA: 99b97afc7de1ed16ddc7db29ab6354bd6ea3dfb7
+Upstream Commit SHA: ba9428558adc70ed8cb3cdcea1723358ead23741
+Current Version: v0.8.0-325-g99b97afc
+Upstream Version: v0.8.0-354-gba942855
+Rollback Commit: 99b97afc7de1ed16ddc7db29ab6354bd6ea3dfb7
+Rollback Branch: master
+Rollback Version: v0.8.0-325-g99b97afc
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 29
+Diverged: False
+2024-05-12 14:26:32,568 [git_deploy.py:log_repo_info()] - Git Repo klipper Detected:
+Owner: Klipper3d
+Repository Name: klipper
+Path: /home/Oghma/klipper
+Remote: origin
+Branch: master
+Remote URL: https://github.com/Klipper3d/klipper
+Recovery URL: https://github.com/Klipper3d/klipper
+Current Commit SHA: 01c7befacb5b71643130433f2afb3f22ece68d71
+Upstream Commit SHA: 434770eaf9d382cccba203a3475ace2dc0653d7b
+Current Version: v0.12.0-143-g01c7befa-dirty
+Upstream Version: v0.12.0-179-g434770ea
+Rollback Commit: 01c7befacb5b71643130433f2afb3f22ece68d71
+Rollback Branch: master
+Rollback Version: v0.12.0-143-g01c7befa
+Is Dirty: True
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 36
+Diverged: False
+Repo Warnings:
+  Repo is dirty.  Detected the following modifed files: ['klippy/mcu.py']
+  Repo has untracked source files: ['klippy/extras/gcode_shell_command.py']
+2024-05-12 14:26:32,573 [git_deploy.py:log_repo_info()] - Git Repo fluidd-config Detected:
+Owner: fluidd-core
+Repository Name: fluidd-config
+Path: /home/Oghma/fluidd-config
+Remote: origin
+Branch: master
+Remote URL: https://github.com/fluidd-core/fluidd-config.git
+Recovery URL: https://github.com/fluidd-core/fluidd-config.git
+Current Commit SHA: ce48c5854e9ca3ca72b63d0327069fac20e94c7c
+Upstream Commit SHA: ce48c5854e9ca3ca72b63d0327069fac20e94c7c
+Current Version: v1.2.0-0-gce48c585
+Upstream Version: v1.2.0-0-gce48c585
+Rollback Commit: ce48c5854e9ca3ca72b63d0327069fac20e94c7c
+Rollback Branch: master
+Rollback Version: v1.2.0-0-gce48c585
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+2024-05-12 14:26:32,583 [base_deploy.py:log_info()] - Web Client fluidd: Detected
+Repo: fluidd-core/fluidd
+Channel: stable
+Path: /home/Oghma/fluidd
+Local Version: v1.29.1
+Remote Version: v1.30.0
+Valid: True
+Fallback Detected: False
+Pre-release: False
+Download Url: https://github.com/fluidd-core/fluidd/releases/download/v1.30.0/fluidd.zip
+Download Size: 3715088
+Content Type: application/zip
+Rollback Version: v1.29.1
+Rollback Repo: fluidd-core/fluidd
+2024-05-12 14:26:32,585 [git_deploy.py:log_repo_info()] - Git Repo crowsnest Detected:
+Owner: mainsail-crew
+Repository Name: crowsnest
+Path: /home/Oghma/crowsnest
+Remote: origin
+Branch: master
+Remote URL: https://github.com/mainsail-crew/crowsnest.git
+Recovery URL: https://github.com/mainsail-crew/crowsnest.git
+Current Commit SHA: 6ac4711e17f6f7c51998d1f928166fdaee383bf7
+Upstream Commit SHA: d75a3aeb018384e59d03518754f6148c98894ed9
+Current Version: v4.1.8-1-g6ac4711e
+Upstream Version: v4.1.9-1-gd75a3aeb
+Rollback Commit: 6ac4711e17f6f7c51998d1f928166fdaee383bf7
+Rollback Branch: master
+Rollback Version: v4.1.8-1-g6ac4711e
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 4
+Diverged: False
+2024-05-12 14:26:32,586 [base_deploy.py:log_info()] - PackageKit: Next refresh in: 6 Days, 17 Hours, 53 Minutes, 47 Seconds
+2024-05-12 14:26:32,587 [base_deploy.py:log_info()] - Git Repo moonraker: Next refresh in: 6 Days, 17 Hours, 54 Minutes, 2 Seconds
+2024-05-12 14:26:32,587 [base_deploy.py:log_info()] - Git Repo klipper: Next refresh in: 6 Days, 17 Hours, 54 Minutes, 6 Seconds
+2024-05-12 14:26:32,587 [base_deploy.py:log_info()] - Git Repo fluidd-config: Next refresh in: 6 Days, 17 Hours, 54 Minutes, 7 Seconds
+2024-05-12 14:26:32,588 [base_deploy.py:log_info()] - Web Client fluidd: Next refresh in: 6 Days, 17 Hours, 54 Minutes, 8 Seconds
+2024-05-12 14:26:32,588 [base_deploy.py:log_info()] - Git Repo crowsnest: Next refresh in: 6 Days, 17 Hours, 54 Minutes, 9 Seconds
+2024-05-12 14:26:32,595 [extensions.py:start_unix_server()] - Creating Unix Domain Socket at '/home/Oghma/printer_data/comms/moonraker.sock'
+2024-05-12 14:26:32,598 [server.py:start_server()] - Starting Moonraker on (0.0.0.0, 7125), Hostname: DarkWing
+2024-05-12 14:26:32,602 [application.py:listen()] - SSL Certificate/Key not configured, aborting HTTPS Server startup
+2024-05-12 14:26:32,855 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 14:26:32,969 [server.py:add_log_rollover_item()] - 
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['system.slice', 'sysinit.target', '-.mount']
+**After=['sysinit.target', 'basic.target', 'system.slice', 'network-online.target', '-.mount', 'systemd-journald.socket']
+**SupplementaryGroups=[]
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/klipper.env
+**ExecStart=/home/Oghma/klippy-env/bin/python $KLIPPER_ARGS
+**WorkingDirectory=/home/Oghma/klipper
+**FragmentPath=/etc/systemd/system/klipper.service
+**Description=Klipper 3D Printer Firmware SV1
+**User=Oghma
+2024-05-12 14:26:33,224 [server.py:add_log_rollover_item()] - Klipper Version: v0.12.0-143-g01c7befa-dirty
+2024-05-12 14:26:33,251 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-12 14:26:33,254 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-12 14:26:33,258 [klippy_connection.py:_check_ready()] - 
+Can not update MCU 'mcu' config as it is shutdown
+Once the underlying issue is corrected, use the
+"FIRMWARE_RESTART" command to reset the firmware, reload the
+config, and restart the host software.
+Error configuring printer
+
+2024-05-12 14:26:48,577 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
+2024-05-12 14:26:48,774 [application.py:log_request()] - 101 GET /websocket?token=Y5WRN4RE3676PULYWQM4FSYPVYXARYYW (192.168.50.192) [_TRUSTED_USER_] 7.50ms
+2024-05-12 14:26:48,776 [websockets.py:open()] - Websocket Opened: ID: 548285626592, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-12 14:26:48,790 [websockets.py:_handle_identify()] - Websocket 548285626592 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 14:26:48,792 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 14:26:54,564 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 14:26:54,618 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 14:26:55,829 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 14:27:00,119 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-12 14:27:00,122 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-12 14:27:00,370 [job_state.py:_handle_started()] - Job state initialized: standby
+2024-05-12 14:27:00,639 [klippy_connection.py:_check_ready()] - Klippy ready
+2024-05-12 14:27:01,122 [data_store.py:_init_sensors()] - Configuring available sensors: ['heater_bed', 'temperature_sensor Octopus', 'temperature_fan Pi', 'temperature_fan SB2209', 'extruder']
+2024-05-12 14:28:02,313 [job_state.py:_status_update()] - Job Started: sb2040_fan_cover_3010_ABS_1h0m.gcode
+2024-05-12 15:46:44,017 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.50.192
+2024-05-12 15:57:14,810 [application.py:prepare()] - Upload Request Received from 192.168.50.192
+Content-Type: multipart/form-data; boundary=------------------------d1d1d87f5c2727b3
+2024-05-12 15:57:16,738 [application.py:post()] - Processing Uploaded File: Main_Body_ABS_1h56m.gcode
+2024-05-12 15:57:17,345 [shell_command.py:pipe_data_received()] - INFO:metadata:Object Processing is enabled
+
+2024-05-12 15:57:17,373 [shell_command.py:pipe_data_received()] - INFO:metadata:File 'Main_Body_ABS_1h56m.gcode' currently supports cancellation, processing aborted
+
+2024-05-12 15:57:17,641 [shell_command.py:_check_proc_success()] - Command (/home/Oghma/moonraker-env/bin/python /home/Oghma/moonraker/moonraker/components/file_manager/metadata.py -p /home/Oghma/printer_data/gcodes -f "Main_Body_ABS_1h56m.gcode" --check-objects) successfully finished
+2024-05-12 15:57:17,650 [application.py:log_request()] - 201 POST /api/files/local (192.168.50.192) [_API_KEY_USER_] 2843.28ms
+2024-05-12 15:57:17,739 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
+2024-05-12 16:12:22,795 [job_state.py:_status_update()] - Job Started: Main_Body_ABS_1h56m.gcode
+2024-05-12 16:56:08,948 [websockets.py:write_to_socket()] - Websocket closed while writing: 548285626592
+2024-05-12 16:56:13,780 [websockets.py:on_close()] - Websocket Closed: ID: 548285626592 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-05-12 17:04:32,070 [application.py:log_request()] - 101 GET /websocket?token=D6RZ3HJOLQKWCMWBHUTOVMA6OVJOIBEF (192.168.50.192) [_TRUSTED_USER_] 4.01ms
+2024-05-12 17:04:32,071 [websockets.py:open()] - Websocket Opened: ID: 548284736464, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-12 17:04:32,083 [websockets.py:_handle_identify()] - Websocket 548284736464 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 17:04:32,085 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 17:05:57,909 [job_state.py:_status_update()] - Job Started: Main_Body_ABS_1h56m.gcode
+2024-05-12 17:46:32,122 [websockets.py:write_to_socket()] - Websocket closed while writing: 548284736464
+2024-05-12 17:46:37,075 [websockets.py:on_close()] - Websocket Closed: ID: 548284736464 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-05-12 17:50:16,776 [application.py:log_request()] - 101 GET /websocket?token=G3NH2MLUK7RU34J4JWCI3OYXLOLJO3XY (192.168.50.192) [_TRUSTED_USER_] 5.78ms
+2024-05-12 17:50:16,778 [websockets.py:open()] - Websocket Opened: ID: 548285626736, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-12 17:50:16,797 [websockets.py:_handle_identify()] - Websocket 548285626736 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 17:50:16,798 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 18:51:44,058 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.50.192
+2024-05-12 19:25:12,807 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-12 19:25:12,917 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2024-05-12 19:25:13,114 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
+2024-05-12 19:25:14,068 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-12 19:25:18,273 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-12 19:25:18,278 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-12 19:25:18,525 [job_state.py:_handle_started()] - Job state initialized: standby
+2024-05-12 19:25:18,796 [klippy_connection.py:_check_ready()] - Klippy ready
+2024-05-12 19:25:19,278 [data_store.py:_init_sensors()] - Configuring available sensors: ['heater_bed', 'temperature_sensor Octopus', 'temperature_fan Pi', 'temperature_fan SB2209', 'extruder']
+2024-05-12 19:32:24,818 [websockets.py:on_close()] - Websocket Closed: ID: 548285626736 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 8.03
+2024-05-12 19:32:25,350 [application.py:log_request()] - 101 GET /websocket?token=KOJNVEBPX7PH4VNXYJQJYVGALI3JUIQI (192.168.50.192) [_TRUSTED_USER_] 5.69ms
+2024-05-12 19:32:25,352 [websockets.py:open()] - Websocket Opened: ID: 548284736464, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-12 19:32:25,367 [websockets.py:_handle_identify()] - Websocket 548284736464 Client Identified - Name: fluidd, Version: 1.29.1-fef6e12, Type: web
+2024-05-12 19:32:25,369 [file_manager.py:get_file_list()] - Updating File List <config>...
+2024-05-12 19:59:25,794 [application.py:prepare()] - Upload Request Received from 192.168.50.192
+Content-Type: multipart/form-data; boundary=------------------------9eee019f25f1cb2b
+2024-05-12 19:59:36,428 [application.py:post()] - Processing Uploaded File: main_body_cw2_ecas_ebb_d2fx2_lower_switch_fix_ABS_5h8m.gcode
+2024-05-12 19:59:36,870 [shell_command.py:pipe_data_received()] - INFO:metadata:Object Processing is enabled
+
+2024-05-12 19:59:36,897 [shell_command.py:pipe_data_received()] - INFO:metadata:File 'main_body_cw2_ecas_ebb_d2fx2_lower_switch_fix_ABS_5h8m.gcode' currently supports cancellation, processing aborted
+
+2024-05-12 19:59:37,119 [shell_command.py:_check_proc_success()] - Command (/home/Oghma/moonraker-env/bin/python /home/Oghma/moonraker/moonraker/components/file_manager/metadata.py -p /home/Oghma/printer_data/gcodes -f "main_body_cw2_ecas_ebb_d2fx2_lower_switch_fix_ABS_5h8m.gcode" --check-objects) successfully finished
+2024-05-12 19:59:37,148 [application.py:log_request()] - 201 POST /api/files/local (192.168.50.192) [_API_KEY_USER_] 11357.40ms
+2024-05-12 19:59:37,237 [job_state.py:_status_update()] - Job Started: main_body_cw2_ecas_ebb_d2fx2_lower_switch_fix_ABS_5h8m.gcode
+2024-05-12 21:01:44,092 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.50.192
+2024-05-12 21:35:45,320 [klippy_connection.py:_process_status_update()] - Klippy has shutdown
+2024-05-12 21:35:45,332 [proc_stats.py:_handle_shutdown()] - 
+Moonraker System Usage Statistics:
+System Time: 1715564115.907486, Usage: 2.43%, Memory: 54332 kB
+System Time: 1715564116.914900, Usage: 2.55%, Memory: 54332 kB
+System Time: 1715564117.916439, Usage: 3.3%, Memory: 54332 kB
+System Time: 1715564118.911416, Usage: 2.74%, Memory: 54332 kB
+System Time: 1715564119.914051, Usage: 3.99%, Memory: 54332 kB
+System Time: 1715564120.913991, Usage: 2.11%, Memory: 54332 kB
+System Time: 1715564121.915601, Usage: 2.05%, Memory: 54332 kB
+System Time: 1715564122.916370, Usage: 2.02%, Memory: 54332 kB
+System Time: 1715564123.922613, Usage: 2.66%, Memory: 54332 kB
+System Time: 1715564124.918649, Usage: 3.14%, Memory: 54332 kB
+System Time: 1715564125.919341, Usage: 2.28%, Memory: 54332 kB
+System Time: 1715564126.920705, Usage: 1.95%, Memory: 54332 kB
+System Time: 1715564127.922004, Usage: 2.01%, Memory: 54332 kB
+System Time: 1715564128.922746, Usage: 1.95%, Memory: 54332 kB
+System Time: 1715564129.929458, Usage: 4.27%, Memory: 54332 kB
+System Time: 1715564130.930633, Usage: 3.19%, Memory: 54332 kB
+System Time: 1715564131.931405, Usage: 3.24%, Memory: 54332 kB
+System Time: 1715564132.934439, Usage: 3.18%, Memory: 54332 kB
+System Time: 1715564133.935897, Usage: 3.36%, Memory: 54332 kB
+System Time: 1715564134.931779, Usage: 2.88%, Memory: 54332 kB
+System Time: 1715564135.933899, Usage: 2.32%, Memory: 54332 kB
+System Time: 1715564136.935722, Usage: 1.96%, Memory: 54332 kB
+System Time: 1715564137.938135, Usage: 1.99%, Memory: 54332 kB
+System Time: 1715564138.941110, Usage: 1.96%, Memory: 54332 kB
+System Time: 1715564139.947976, Usage: 4.55%, Memory: 54332 kB
+System Time: 1715564140.947825, Usage: 3.47%, Memory: 54332 kB
+System Time: 1715564141.947391, Usage: 3.28%, Memory: 54332 kB
+System Time: 1715564142.950395, Usage: 2.96%, Memory: 54332 kB
+System Time: 1715564143.952097, Usage: 3.26%, Memory: 54332 kB
+System Time: 1715564144.951090, Usage: 3.3%, Memory: 54332 kB
+CPU Temperature: 40.78
+2024-05-12 21:35:45,334 [proc_stats.py:_handle_shutdown()] - Throttled Flags: 
+2024-05-12 21:35:45,659 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
