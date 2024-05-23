@@ -1,0 +1,221 @@
+-------------------- Log Start | Thu May 23 08:29:27 2024 --------------------
+platform: Linux-6.6.28+rpt-rpi-v7-armv7l-with-glibc2.36
+data_path: /home/Oghma/printer_data
+is_default_data_path: False
+config_file: /home/Oghma/printer_data/config/moonraker.conf
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: False
+instance_uuid: fea1344a3b434f8ba5d5586b4e7d878d
+unix_socket_path: /home/Oghma/printer_data/comms/moonraker.sock
+software_version: v0.8.0-359-g73df63d
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: []
+unofficial_components: []
+log_file: /home/Oghma/printer_data/logs/moonraker.log
+python_version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+launch_args: /home/Oghma/moonraker-env/bin/python /home/Oghma/moonraker/moonraker/moonraker.py -d /home/Oghma/printer_data
+msgspec_enabled: False
+uvloop_enabled: False
+
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /home/Oghma/printer_data/comms/klippy.sock
+
+[authorization]
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+	127.0.0.1
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+channel = dev
+refresh_interval = 168
+
+[update_manager mainsail-config]
+type = git_repo
+primary_branch = master
+path = ~/mainsail-config
+origin = https://github.com/mainsail-crew/mainsail-config.git
+managed_services = klipper
+
+[update_manager mainsail]
+type = web
+channel = stable
+repo = mainsail-crew/mainsail
+path = ~/mainsail
+
+[update_manager KlipperScreen]
+type = git_repo
+path = ~/KlipperScreen
+origin = https://github.com/KlipperScreen/KlipperScreen.git
+virtualenv = ~/.KlipperScreen-env
+requirements = scripts/KlipperScreen-requirements.txt
+system_dependencies = scripts/system-dependencies.json
+managed_services = KlipperScreen
+
+#################################################################
+All Configuration Files:
+/home/Oghma/printer_data/config/moonraker.conf
+#################################################################
+
+Database Versions: pylmdb = 1.4.1, lmdb = (0, 9, 29)
+Unsafe Shutdown Count: 0
+
+System Info:
+
+***python***
+  version: (3, 11, 2, 'final', 0)
+  version_string: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 32bit
+  processor: armv7l
+  cpu_desc: ARMv7 Processor rev 4 (v7l)
+  serial_number: efdbc431
+  hardware_desc: BCM2835
+  model: Raspberry Pi 3 Model B Plus Rev 1.3
+  total_memory: 943032
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 03
+  manufacturer: Sandisk
+  oem_id: 5344
+  product_name: SC16G
+  product_revision: 8.0
+  serial_number: d52e2e49
+  manufacturer_date: 1/2021
+  capacity: 14.8 GiB
+  total_bytes: 15931539456
+
+***distribution***
+  name: Raspbian GNU/Linux 12 (bookworm)
+  id: raspbian
+  version: 12
+  version_parts: {'major': '12', 'minor': '', 'build_number': ''}
+  like: debian
+  codename: bookworm
+  release_info: {}
+  kernel_version: 6.6.28+rpt-rpi-v7
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+Module libcamera unavailble, import failed
+
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['system.slice', 'sysinit.target', '-.mount', 'network-online.target']
+**After=['system.slice', 'sysinit.target', 'systemd-journald.socket', '-.mount', 'network-online.target', 'basic.target']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/moonraker.env
+**ExecStart=/home/Oghma/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/Oghma/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=Oghma
+
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['-.mount', 'sysinit.target', 'system.slice']
+**After=['system.slice', 'network-online.target', 'systemd-journald.socket', 'sysinit.target', '-.mount', 'basic.target']
+**SupplementaryGroups=[]
+**EnvironmentFiles=/home/Oghma/printer_data/systemd/klipper.env
+**ExecStart=/home/Oghma/klippy-env/bin/python $KLIPPER_ARGS
+**WorkingDirectory=/home/Oghma/klipper
+**FragmentPath=/etc/systemd/system/klipper.service
+**Description=Klipper 3D Printer Firmware SV1
+**User=Oghma
+Git Repo moonraker: No warnings detected
+Git Repo klipper: No warnings detected
+Git Repo mainsail-config: No warnings detected
+Klipper Version: v0.12.0-192-gb7f7b8a3
+Git Repo KlipperScreen: No warnings detected
+2024-05-23 04:29:27,585 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.50.192
+2024-05-23 04:29:27,587 [application.py:log_request()] - 101 GET /websocket (192.168.50.192) [_TRUSTED_USER_] 2.77ms
+2024-05-23 04:29:27,588 [websockets.py:open()] - Websocket Opened: ID: 1726415312, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0, Host Name: 192.168.50.96
+2024-05-23 04:29:27,599 [websockets.py:_handle_identify()] - Websocket 1726415312 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-23 04:29:27,750 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1716452968715 (192.168.50.192) [_TRUSTED_USER_] 4.83ms
+2024-05-23 04:29:48,437 [klippy_connection.py:_process_status_update()] - Klippy has shutdown
+2024-05-23 04:29:48,443 [proc_stats.py:_handle_shutdown()] - 
+Moonraker System Usage Statistics:
+System Time: 1716452959.144084, Usage: 2.04%, Memory: 37908 kB
+System Time: 1716452960.146609, Usage: 1.91%, Memory: 37908 kB
+System Time: 1716452961.147258, Usage: 2.17%, Memory: 37908 kB
+System Time: 1716452962.148399, Usage: 3.33%, Memory: 37908 kB
+System Time: 1716452963.148817, Usage: 2.07%, Memory: 37908 kB
+System Time: 1716452964.151006, Usage: 1.94%, Memory: 37908 kB
+System Time: 1716452965.153436, Usage: 1.79%, Memory: 37908 kB
+System Time: 1716452966.154548, Usage: 2.07%, Memory: 37908 kB
+System Time: 1716452967.156081, Usage: 2.09%, Memory: 37908 kB
+System Time: 1716452968.157502, Usage: 12.67%, Memory: 37912 kB
+System Time: 1716452969.159784, Usage: 2.44%, Memory: 37912 kB
+System Time: 1716452970.161876, Usage: 2.24%, Memory: 37912 kB
+System Time: 1716452971.163170, Usage: 2.58%, Memory: 37912 kB
+System Time: 1716452972.164128, Usage: 3.34%, Memory: 37912 kB
+System Time: 1716452973.165833, Usage: 2.54%, Memory: 37912 kB
+System Time: 1716452974.167290, Usage: 2.14%, Memory: 37912 kB
+System Time: 1716452975.167721, Usage: 2.65%, Memory: 37912 kB
+System Time: 1716452976.170260, Usage: 2.12%, Memory: 37912 kB
+System Time: 1716452977.173414, Usage: 2.69%, Memory: 37912 kB
+System Time: 1716452978.175357, Usage: 2.84%, Memory: 37912 kB
+System Time: 1716452979.178228, Usage: 2.61%, Memory: 37912 kB
+System Time: 1716452980.180004, Usage: 2.14%, Memory: 37912 kB
+System Time: 1716452981.182667, Usage: 2.58%, Memory: 37912 kB
+System Time: 1716452982.185051, Usage: 3.76%, Memory: 37912 kB
+System Time: 1716452983.187004, Usage: 2.58%, Memory: 37912 kB
+System Time: 1716452984.189616, Usage: 2.08%, Memory: 37912 kB
+System Time: 1716452985.191782, Usage: 2.56%, Memory: 37912 kB
+System Time: 1716452986.194566, Usage: 2.09%, Memory: 37912 kB
+System Time: 1716452987.196368, Usage: 2.57%, Memory: 37912 kB
+System Time: 1716452988.198408, Usage: 2.79%, Memory: 37912 kB
+CPU Temperature: 43.47
+2024-05-23 04:29:48,446 [proc_stats.py:_handle_shutdown()] - Throttled Flags: 
